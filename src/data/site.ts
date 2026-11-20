@@ -1,0 +1,324 @@
+import doctorShakeeb from "@/assets/doctor-shakeeb.jpg";
+import doctorMehnaz from "@/assets/doctor-mehnaz.jpg";
+import doctorRavi from "@/assets/doctor-ravi.jpg";
+
+export const WHATSAPP_URL = "https://wa.me/916362064109";
+export const PHONE_URL = "tel:+916362064109";
+export const PHARMACY_DELIVERY_URL = "tel:+916363778957";
+export const EMAIL = "frontdesk.wellstar.in";
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61583266480205";
+export const INSTAGRAM_URL = "https://www.instagram.com/wellstarpolyclinic_2025/";
+export const CLINIC_ADDRESS = "45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru, Karnataka 560045";
+export const MAPS_URL = "https://maps.google.com/?q=45%2F2%2C+8th+A+Cross+Rd%2C+Kanaka+Nagar%2C+Hebbal%2C+Bengaluru+560045";
+
+export function whatsappLink(message: string) {
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+}
+
+export const navItems = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Doctors", to: "/doctors" },
+  { label: "Services", to: "/services" },
+  { label: "Lab", to: "/lab" },
+  { label: "Pharmacy", to: "/pharmacy" },
+  { label: "Contact", to: "/contact" },
+];
+
+export const teamRoles = [
+  "Dr. Shakeeb Ahmer — Physician Specialist (Internal Medicine & Chronic Disease Management)",
+  "Dr. Mehnaz Rashid — Obstetrician & Gynecologist (Women’s Health & Maternity Care)",
+  "Orthopaedic Surgeon — Bone, Joint & Spine Health",
+  "Dermatologist — Skin, Hair & Cosmetic Treatments",
+  "General Physician — Everyday Health & Wellness for Children, Adults and Elders",
+  "Physiotherapist — Pain Relief, Mobility & Rehabilitation",
+];
+
+export const specialties = [
+  {
+    id: "general-physician",
+    title: "General Physician & Internal Medicine",
+    lead: "Diagnostics & care under one roof, led by Dr. Shakeeb Ahmer.",
+    summary: "First point of contact for everyday health, chronic disease care and family consultations.",
+    description:
+      "Our Consultant Physician & Internal Medicine Specialist provides comprehensive care for the entire family. We are the trusted first point of contact for everyday health issues, offering expert consultation for both adults and children.",
+    points: [
+      "Accurate diagnosis and evidence-based management of chronic conditions like Diabetes Mellitus, Hypertension and Thyroid disorders",
+      "Preventative care including annual medical check-ups and health counselling",
+      "In-house day-care for acute conditions such as Dengue and severe dehydration",
+      "Minor procedures including wound suturing and IV treatments",
+    ],
+  },
+  {
+    id: "gynecology",
+    title: "Gynecology & Obstetrics",
+    lead: "Compassionate, personalised care for women at every stage of life.",
+    summary: "High-risk pregnancy, PCOS, fertility support and women’s health with Dr. Mehnaz Rashid.",
+    description:
+      "The Obstetrics & Gynecology department, led by Dr. Mehnaz Rashid, offers comprehensive women’s healthcare with expertise, empathy and integrity.",
+    points: [
+      "High-risk pregnancy management, pre-natal and post-partum care",
+      "PCOS, infertility and adolescent health concerns",
+      "Irregular/heavy cycles, endometriosis and fibroids",
+      "Minimally invasive gynecologic surgery, Pap smears, HPV vaccination and STI/STD diagnosis",
+      "In-house IUD/Copper-T insertion/removal and CTG/NST for pregnant women",
+    ],
+  },
+  {
+    id: "orthopedics",
+    title: "Orthopedics",
+    lead: "Bone, joint and muscle care with Dr. Raviraj Tantry.",
+    summary: "Fractures, sports injuries, arthritis and spine-related concerns.",
+    description:
+      "Our Orthopedician specialises in comprehensive musculoskeletal care — helping patients regain mobility and long-term wellbeing through personalised, evidence-based plans.",
+    points: [
+      "Acute injuries: fractures, sports-related trauma and ligament tears",
+      "Chronic conditions: osteoarthritis, joint pain, back pain and spinal health issues",
+      "Surgical and non-surgical approaches",
+      "First-aid for trauma, wound management and post-injury care",
+    ],
+  },
+  {
+    id: "dermatology",
+    title: "Dermatology",
+    lead: "Expert care for skin, hair and nail concerns.",
+    summary: "Acne, pigmentation, hair fall and in-house cosmetic procedures.",
+    description:
+      "Our Dermatology department diagnoses and treats common to complex skin conditions, with advanced cosmetic procedures available in-house.",
+    points: [
+      "Management of acne, scars, pigmentation and melasma",
+      "Dermatological peels, wart/mole removal and microdermabrasion (Diamond Peel)",
+      "Hair-fall treatments",
+      "Aesthetic care including PRP therapy, MNRF and anti-ageing / skin-brightening procedures",
+    ],
+  },
+  {
+    id: "day-care",
+    title: "Day Care",
+    lead: "Acute care without an overnight hospital stay.",
+    summary: "IV care, fever management, infusions and short observation.",
+    description:
+      "A dedicated day-care facility for effective treatment and close observation of acute conditions in a controlled, comfortable environment.",
+    points: [
+      "Severe fever including Dengue, gastroenteritis, hyperemesis, asthma exacerbations, acute migraines and dehydration",
+      "IV iron transfusions",
+      "Vitamin infusions / vitality drips",
+      "Continuous medical care and IV medication for a quicker return to wellness",
+    ],
+  },
+];
+
+export const doctors = [
+  {
+    name: "Dr. Shakeeb Ahmer",
+    credentials: "MBBS, DNB (Internal Medicine), MRCP (UK)",
+    specialty: "Consultant Physician & Internal Medicine Specialist",
+    image: doctorShakeeb,
+    summary: "Internal medicine specialist with over a decade of experience and a special interest in diabetes care.",
+    bio: [
+      "Dr. Shakeeb Ahmer is a trusted Internal Medicine Specialist with over a decade of clinical experience in adult medical care. After completing his MBBS, he earned his DNB in Internal Medicine and the prestigious MRCP (UK), building a strong foundation in evidence-based clinical practice.",
+      "He has trained and served at leading hospitals including Narayana Hrudayalaya (Gurugram), Manipal Hospital (Hebbal, Bangalore), St. Philomena’s Hospital and Apex Hospital — gaining extensive experience in diagnosing and managing complex, multisystem disorders.",
+      "His practice covers preventive check-ups, lifestyle counselling and chronic conditions such as hypertension, thyroid disorders and infectious diseases. He has a special interest in Diabetes Mellitus, helping patients achieve optimal sugar control and prevent long-term complications through personalised care.",
+      "Known for listening carefully and taking detailed histories before starting treatment, Dr. Shakeeb is committed to clear, effective and compassionate medical care guided by the latest international standards.",
+    ],
+  },
+  {
+    name: "Dr. Mehnaz Rashid",
+    credentials: "MBBS, DNB (Obstetrics & Gynecology), FMAS, DMAS, ICRS (Robotic Surgery)",
+    specialty: "Consultant Obstetrician & Gynecologist",
+    image: doctorMehnaz,
+    summary: "Specialist in high-risk pregnancy, minimally invasive surgery and reproductive health.",
+    bio: [
+      "Dr. Mehnaz Rashid is a highly skilled and compassionate Obstetrician & Gynecologist, specialising in high-risk pregnancy management, minimally invasive gynecologic surgery and reproductive health care.",
+      "After completing her MBBS, she pursued a DNB in Obstetrics & Gynecology, followed by FMAS & DMAS and ICRS-certified Robotic Surgery training for safer, faster and more precise outcomes.",
+      "She has served at the High-Risk Pregnancy Unit at Bhagwan Mahaveer Jain Hospital, Koshy’s Hospital, is a Visiting Consultant at Cloudnine Hospital, and currently practices as a Consultant at Motherhood Hospital.",
+      "Deeply committed to volunteer work through women’s health camps, her approach is empathetic, evidence-based and holistic — integrating nutrition, exercise therapy and everyday herbs into personalised treatment plans. At Wellstar she leads the Department of Obstetrics & Gynecology.",
+    ],
+  },
+  {
+    name: "Dr. Ravi Raj Tantry",
+    credentials: "MBBS, MD (Orthopedics)",
+    specialty: "Consultant Orthopedician",
+    image: doctorRavi,
+    summary: "Bone, joint and muscle specialist for injuries, arthritis and rehabilitation.",
+    bio: [
+      "Dr. Raviraj Tantry specialises in the comprehensive management of bone, joint and muscle health at Wellstar Polyclinic & Diagnostic Centre.",
+      "He provides expert consultation and treatment for acute injuries such as fractures, sports-related trauma and ligament tears, as well as chronic conditions including osteoarthritis, joint pain, back pain and spinal health issues.",
+      "Care includes both surgical and non-surgical approaches, first-aid for trauma, wound management and post-injury rehabilitation — with personalised, evidence-based plans aimed at restoring mobility and quality of life.",
+    ],
+  },
+];
+
+export const diagnostics = [
+  { title: "Blood & Urine Tests", description: "Comprehensive testing for kidney, liver, heart, infection and general health conditions." },
+  { title: "Allergy Testing", description: "Identify triggers and manage allergic reactions effectively." },
+  { title: "Sexual Health Screening", description: "Confidential STI/STD diagnosis and treatment." },
+  { title: "Full Body & Preventive Health Check-ups", description: "Regular assessments to monitor overall wellness." },
+  { title: "Hormone & Vitamin Panels", description: "Testing for thyroid, vitamin deficiencies and hormonal imbalances." },
+  { title: "Diabetes Profile", description: "Includes blood sugar, HbA1c and insulin level evaluation." },
+  { title: "Kidney & Liver Function (RFT, LFT)", description: "Assess organ performance and detect abnormalities early." },
+  { title: "Fever & Infection Profile", description: "Detect common infections, fevers and related conditions." },
+  { title: "ECG (Electrocardiogram)", description: "12-lead ECG to assess heart rhythm and electrical activity." },
+  { title: "Lipid & Cardiac Profile", description: "Detailed heart and cholesterol health check-up." },
+  { title: "CTG / NST", description: "Fetal heart rate and pregnancy wellbeing assessment." },
+  { title: "Partner imaging", description: "X-rays and ultrasounds are arranged at a nearby tied-up centre." },
+];
+
+export type HealthPackage = {
+  name: string;
+  tests: string[];
+  originalPrice: number;
+  offerPrice: number;
+};
+
+export const generalHealthPackages: HealthPackage[] = [
+  {
+    name: "Basic Fever",
+    tests: ["CBC", "CRP", "Widal Test", "MP Smear", "ESR"],
+    originalPrice: 2540,
+    offerPrice: 999,
+  },
+  {
+    name: "Fever Health",
+    tests: ["CBC", "CRP", "Urine Routine", "Widal Test", "MP Smear", "Dengue Profile", "Culture (Blood / Urine / Sputum)"],
+    originalPrice: 4100,
+    offerPrice: 2399,
+  },
+  {
+    name: "Basic Health",
+    tests: ["CBC", "Creatinine", "Urine Routine", "Total Cholesterol", "Triglycerides", "RBS", "TSH"],
+    originalPrice: 2700,
+    offerPrice: 1499,
+  },
+  {
+    name: "Comprehensive Health",
+    tests: ["Complete Hemogram", "RFT", "Urine Routine", "LFT", "Lipid Profile", "FBS", "PPBS", "HbA1C", "TFT", "Vitamin B12", "Vitamin D", "ECG"],
+    originalPrice: 6970,
+    offerPrice: 3999,
+  },
+  {
+    name: "Anemia Health",
+    tests: ["Complete Hemogram", "Iron Profile", "LFT - Basic", "Vitamin B12", "Blood Group", "RH Typing"],
+    originalPrice: 3320,
+    offerPrice: 2199,
+  },
+  {
+    name: "Diabetes Health",
+    tests: ["FBS", "PPBS", "HbA1C", "Creatinine", "Urine Routine", "Lipid Profile", "Vitamin B12"],
+    originalPrice: 3200,
+    offerPrice: 1799,
+  },
+];
+
+export const womensHealthPackages: HealthPackage[] = [
+  {
+    name: "Antenatal Health",
+    tests: ["CBC", "Blood Group & RH Typing", "Urine Routine", "HbA1C", "TSH", "Anti HCV", "HBsAg", "HIV", "VDRL", "Vitamin B12", "Vitamin D"],
+    originalPrice: 5970,
+    offerPrice: 3999,
+  },
+  {
+    name: "Antenatal Health II",
+    tests: ["CBC", "Urine Routine", "TSH", "OGTT", "HbA1C"],
+    originalPrice: 4370,
+    offerPrice: 2199,
+  },
+  {
+    name: "Infertility / PCOS Health",
+    tests: ["CBC", "Urine Routine", "TSH", "HbA1C", "PRL", "AMH", "Vitamin B12", "Vitamin D"],
+    originalPrice: 6445,
+    offerPrice: 4299,
+  },
+  {
+    name: "Women's Health",
+    tests: ["CBC", "Creatinine", "Urine Routine", "TSH", "HbA1C", "Vitamin B12", "Vitamin D"],
+    originalPrice: 4370,
+    offerPrice: 2199,
+  },
+  {
+    name: "Comprehensive Fertility",
+    tests: ["CBC", "ESR", "Urine Routine", "FBS / RBS", "TFT", "HbA1C", "LH", "PRL", "FSH", "AMH", "Vitamin B12", "Vitamin D", "Insulin"],
+    originalPrice: 9055,
+    offerPrice: 6199,
+  },
+  {
+    name: "Basic Fertility",
+    tests: ["CBC", "ESR", "FBS / RBS", "Urine Routine", "TFT", "HbA1C", "PRL", "FSH"],
+    originalPrice: 3070,
+    offerPrice: 1799,
+  },
+];
+
+export const pharmacyPoints = [
+  { title: "Quality medicines", description: "All drugs are WHO-GMP certified, ensuring safety and effectiveness." },
+  { title: "Affordable pricing", description: "Medications are available at pocket-friendly rates." },
+  { title: "Home delivery", description: "Medicines delivered within a 2 km radius for patient convenience." },
+  { title: "Doctor-supervised dispensing", description: "Prescriptions are reviewed and dispensed under medical supervision for accurate dosage and usage." },
+];
+
+export const pharmacyCategories = ["Diabetes", "Cardiac Care", "Stomach Care", "Pregnancy", "Mom and Baby"];
+
+export const values = [
+  { title: "Specialists under one roof", description: "Physician, gynecologist, orthopedician, dermatologist, general physician and physiotherapist support for your family." },
+  { title: "Evidence-based care", description: "Every consultation is guided by experience, compassion and advanced medical science." },
+  { title: "Diagnostics on-site", description: "Accurate, efficient testing with digital health records for seamless follow-up care." },
+  { title: "Online consultations", description: "In-clinic visits and virtual consults available via Apollo 24|7." },
+];
+
+export const testimonials = [
+  {
+    name: "Vivek Chaudhary",
+    quote: "Dr Shakeeb is an excellent doctor who listens carefully, explains things properly and treats with compassion. The treatment plan was effective. Highly recommended!",
+  },
+  {
+    name: "Rakheeba Y",
+    quote: "Great experience. Dr. Mehnaz is a best doctor and she is a good listener. She has healing hands. Overall great experience.",
+  },
+  {
+    name: "Tabrez Khan",
+    quote: "Consulted Dr Shakeeb for my father who is diabetic. Highly professional, helpful in emergencies, and gave us hope when others had given up. Grateful for his continuous support.",
+  },
+  {
+    name: "Aliya Ayub",
+    quote: "After consulting Dr. Shakeeb Ahmer, my diabetic condition came under control. Very good experience — recommend for all.",
+  },
+  {
+    name: "Farheen S.",
+    quote: "Clinic is clean, staff are warm, and lab reports came on time. Booking on WhatsApp made everything simple for our family.",
+  },
+  {
+    name: "Mohammed R.",
+    quote: "Pharmacy delivery within Hebbal was quick and the medicines matched the prescription exactly. Reliable neighbourhood clinic.",
+  },
+];
+
+export const questions = [
+  {
+    question: "What are the clinic timings?",
+    answer: "Monday to Saturday: 8:00 AM – 10:00 PM. Sunday: 8:00 AM – 1:00 PM. Please call ahead if you need to confirm a specific doctor’s availability.",
+  },
+  {
+    question: "Can I walk in without an appointment?",
+    answer: "Walk-ins may be possible depending on the doctor’s schedule. Calling or messaging us first helps us confirm availability and reduce waiting time.",
+  },
+  {
+    question: "How do I book an online consultation?",
+    answer: "Online consultations are available via Apollo 24|7. Contact our team on WhatsApp or phone if you need help getting started.",
+  },
+  {
+    question: "What lab tests are available?",
+    answer: "We offer blood and urine tests, allergy testing, sexual health screening, full-body and women’s health packages, hormone and vitamin panels, diabetes profile, RFT/LFT, fever panels, ECG, lipid and cardiac profile, and CTG/NST. X-ray and ultrasound are arranged at a nearby tied-up centre.",
+  },
+  {
+    question: "Do you deliver medicines?",
+    answer: "Yes. Our pharmacy offers home delivery within a 2 km radius. Call 63637 78957 for immediate medicine delivery. Categories include Diabetes, Cardiac Care, Stomach Care, Pregnancy, and Mom and Baby.",
+  },
+  {
+    question: "Who founded Wellstar?",
+    answer: "Wellstar Polyclinic was founded by Syed Ashfaq and a dedicated team of founding members on the premise that affordable, high-quality healthcare should be accessible to everyone under one roof, delivered with compassion, integrity and excellence.",
+  },
+];
+
+export function formatInr(amount: number) {
+  return `₹${amount.toLocaleString("en-IN")}`;
+}

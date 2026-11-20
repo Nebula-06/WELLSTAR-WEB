@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+
+  --color-background: var(--ws-background);
+  --color-foreground: var(--ws-foreground);
+  --color-card: var(--ws-card);
+  --color-card-foreground: var(--ws-card-foreground);
+  --color-primary: var(--ws-primary);
+  --color-primary-foreground: var(--ws-primary-foreground);
+  --color-secondary: var(--ws-secondary);
+  --color-secondary-foreground: var(--ws-secondary-foreground);
+  --color-muted: var(--ws-muted);
+  --color-muted-foreground: var(--ws-muted-foreground);
+  --color-accent: var(--ws-accent);
+  --color-accent-foreground: var(--ws-accent-foreground);
+  --color-destructive: var(--ws-destructive);
+  --color-border: var(--ws-border);
+  --color-input: var(--ws-input);
+  --color-ring: var(--ws-ring);
+  --color-clinic-gold: var(--ws-clinic-gold);
+  --color-clinic-sage: var(--ws-clinic-sage);
+  --color-clinic-surface: var(--ws-clinic-surface);
+}
+
+:root {
+  --ws-background: #ffffff;
+  --ws-foreground: #14201a;
+  --ws-card: #ffffff;
+  --ws-card-foreground: #14201a;
+  --ws-primary: #165a40;
+  --ws-primary-foreground: #ffffff;
+  --ws-secondary: #eef5f0;
+  --ws-secondary-foreground: #165a40;
+  --ws-muted: #f3f5f4;
+  --ws-muted-foreground: #5a6a62;
+  --ws-accent: #e4efe8;
+  --ws-accent-foreground: #165a40;
+  --ws-destructive: #b42318;
+  --ws-border: #e2e8e4;
+  --ws-input: #e2e8e4;
+  --ws-ring: #165a40;
+  --ws-clinic-gold: #a67c2e;
+  --ws-clinic-sage: #d7e5db;
+  --ws-clinic-surface: #f7faf8;
+}
+
+.dark {
+  --ws-background: #0d1411;
+  --ws-foreground: #eef5f1;
+  --ws-card: #15201b;
+  --ws-card-foreground: #eef5f1;
+  --ws-primary: #6fbf95;
+  --ws-primary-foreground: #0b1611;
+  --ws-secondary: #1c2a24;
+  --ws-secondary-foreground: #d7ebe0;
+  --ws-muted: #1a2420;
+  --ws-muted-foreground: #a3b5ac;
+  --ws-accent: #24342d;
+  --ws-accent-foreground: #d7ebe0;
+  --ws-destructive: #f97066;
+  --ws-border: #2a3a33;
+  --ws-input: #2a3a33;
+  --ws-ring: #6fbf95;
+  --ws-clinic-gold: #d4a84b;
+  --ws-clinic-sage: #24342d;
+  --ws-clinic-surface: #121b17;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 100% -10%, color-mix(in oklab, var(--ws-clinic-sage) 55%, transparent), transparent 55%),
+      radial-gradient(ellipse 60% 40% at -10% 20%, color-mix(in oklab, var(--ws-secondary) 80%, transparent), transparent 50%);
+    background-attachment: fixed;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(ellipse 70% 45% at 100% -10%, color-mix(in oklab, #1f4d3a 35%, transparent), transparent 55%),
+      radial-gradient(ellipse 50% 35% at 0% 30%, color-mix(in oklab, #24342d 50%, transparent), transparent 50%);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .section-kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.16em] text-primary;
+  }
+
+  .section-title {
+    @apply font-display text-4xl leading-tight text-foreground sm:text-5xl;
+  }
+
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .surface-card {
+    @apply rounded-sm border border-border/80 bg-card/90 shadow-[0_1px_0_rgba(20,32,26,0.04)] backdrop-blur-sm transition duration-300;
+  }
+
+  .surface-card:hover {
+    @apply border-primary/25 shadow-[0_18px_40px_-28px_rgba(22,90,64,0.45)] -translate-y-0.5;
+  }
+
+  .dark .surface-card {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .dark .surface-card:hover {
+    box-shadow: 0 22px 44px -28px rgba(0, 0, 0, 0.7);
+  }
+
+  .hero-frame {
+    @apply relative overflow-hidden rounded-sm border border-border/70 bg-clinic-sage shadow-[0_30px_60px_-40px_rgba(22,90,64,0.55)];
+  }
+}
+
+@keyframes review-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
