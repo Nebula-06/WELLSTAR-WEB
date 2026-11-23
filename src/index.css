@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&family=Noto+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Figtree", ui-sans-serif, system-ui, sans-serif;
 
   --color-background: var(--ws-background);
   --color-foreground: var(--ws-foreground);
@@ -23,53 +23,71 @@
   --color-border: var(--ws-border);
   --color-input: var(--ws-input);
   --color-ring: var(--ws-ring);
-  --color-clinic-gold: var(--ws-clinic-gold);
-  --color-clinic-sage: var(--ws-clinic-sage);
-  --color-clinic-surface: var(--ws-clinic-surface);
+
+  /* Wellstar brand: navy cross + red drop + teal ribbon (from the logo & package poster) */
+  --color-brand-navy: var(--ws-navy);
+  --color-brand-red: var(--ws-red);
+  --color-brand-red-foreground: var(--ws-red-foreground);
+  --color-brand-teal: var(--ws-teal);
+  --color-surface: var(--ws-surface);
+  --color-ink: var(--ws-ink);
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
 }
 
 :root {
-  --ws-background: #ffffff;
-  --ws-foreground: #14201a;
+  color-scheme: light;
+  --ws-background: #f5f8fd;
+  --ws-foreground: #0a1a3d;
   --ws-card: #ffffff;
-  --ws-card-foreground: #14201a;
-  --ws-primary: #165a40;
+  --ws-card-foreground: #0a1a3d;
+  --ws-primary: #0f3f9e;
   --ws-primary-foreground: #ffffff;
-  --ws-secondary: #eef5f0;
-  --ws-secondary-foreground: #165a40;
-  --ws-muted: #f3f5f4;
-  --ws-muted-foreground: #5a6a62;
-  --ws-accent: #e4efe8;
-  --ws-accent-foreground: #165a40;
-  --ws-destructive: #b42318;
-  --ws-border: #e2e8e4;
-  --ws-input: #e2e8e4;
-  --ws-ring: #165a40;
-  --ws-clinic-gold: #a67c2e;
-  --ws-clinic-sage: #d7e5db;
-  --ws-clinic-surface: #f7faf8;
+  --ws-secondary: #e7eefc;
+  --ws-secondary-foreground: #0f3f9e;
+  --ws-muted: #edf1f8;
+  --ws-muted-foreground: #4a5878;
+  --ws-accent: #e2f4f5;
+  --ws-accent-foreground: #0a6a73;
+  --ws-destructive: #c81e33;
+  --ws-border: #dbe3f0;
+  --ws-input: #d3dcec;
+  --ws-ring: #0f3f9e;
+  --ws-navy: #0a2a6e;
+  --ws-red: #d7263d;
+  --ws-red-foreground: #ffffff;
+  --ws-teal: #0b7f89;
+  --ws-surface: #eef3fb;
+  --ws-ink: #071637;
 }
 
 .dark {
-  --ws-background: #0d1411;
-  --ws-foreground: #eef5f1;
-  --ws-card: #15201b;
-  --ws-card-foreground: #eef5f1;
-  --ws-primary: #6fbf95;
-  --ws-primary-foreground: #0b1611;
-  --ws-secondary: #1c2a24;
-  --ws-secondary-foreground: #d7ebe0;
-  --ws-muted: #1a2420;
-  --ws-muted-foreground: #a3b5ac;
-  --ws-accent: #24342d;
-  --ws-accent-foreground: #d7ebe0;
-  --ws-destructive: #f97066;
-  --ws-border: #2a3a33;
-  --ws-input: #2a3a33;
-  --ws-ring: #6fbf95;
-  --ws-clinic-gold: #d4a84b;
-  --ws-clinic-sage: #24342d;
-  --ws-clinic-surface: #121b17;
+  color-scheme: dark;
+  --ws-background: #050b1a;
+  --ws-foreground: #e9effc;
+  --ws-card: #0c1529;
+  --ws-card-foreground: #e9effc;
+  --ws-primary: #6b9bff;
+  --ws-primary-foreground: #041029;
+  --ws-secondary: #12213f;
+  --ws-secondary-foreground: #cfe0ff;
+  --ws-muted: #0f1a31;
+  --ws-muted-foreground: #9fb0d1;
+  --ws-accent: #0d2a33;
+  --ws-accent-foreground: #7fe0e8;
+  --ws-destructive: #ff6b7d;
+  --ws-border: #1c2a49;
+  --ws-input: #24345a;
+  --ws-ring: #6b9bff;
+  --ws-navy: #9bbcff;
+  --ws-red: #ff5a6e;
+  --ws-red-foreground: #1a0207;
+  --ws-teal: #3fd0da;
+  --ws-surface: #081228;
+  --ws-ink: #030816;
 }
 
 @layer base {
@@ -83,16 +101,33 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 50% at 100% -10%, color-mix(in oklab, var(--ws-clinic-sage) 55%, transparent), transparent 55%),
-      radial-gradient(ellipse 60% 40% at -10% 20%, color-mix(in oklab, var(--ws-secondary) 80%, transparent), transparent 50%);
-    background-attachment: fixed;
   }
 
-  .dark body {
-    background-image:
-      radial-gradient(ellipse 70% 45% at 100% -10%, color-mix(in oklab, #1f4d3a 35%, transparent), transparent 55%),
-      radial-gradient(ellipse 50% 35% at 0% 30%, color-mix(in oklab, #24342d 50%, transparent), transparent 50%);
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--ws-primary) 25%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ws-ring);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+    }
   }
 }
 
@@ -101,53 +136,142 @@
     font-family: var(--font-display);
   }
 
-  .section-kicker {
-    @apply text-xs font-semibold uppercase tracking-[0.16em] text-primary;
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-8 lg:px-10;
+  }
+
+  .section-y {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/15 bg-secondary/80 px-3 py-1 text-[0.72rem] font-bold uppercase tracking-[0.18em] text-primary;
   }
 
   .section-title {
-    @apply font-display text-4xl leading-tight text-foreground sm:text-5xl;
+    @apply font-display text-4xl font-extrabold leading-[1.05] text-foreground sm:text-5xl lg:text-[3.4rem];
   }
 
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+  .text-gradient {
+    background: linear-gradient(100deg, var(--ws-primary) 0%, var(--ws-teal) 55%, var(--ws-red) 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  .scroll-reveal.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  .card-glass {
+    @apply rounded-[1.75rem] border border-border/80 bg-card/85 backdrop-blur-xl;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.6) inset,
+      0 24px 48px -32px color-mix(in oklab, var(--ws-navy) 45%, transparent);
   }
 
-  .surface-card {
-    @apply rounded-sm border border-border/80 bg-card/90 shadow-[0_1px_0_rgba(20,32,26,0.04)] backdrop-blur-sm transition duration-300;
+  .dark .card-glass {
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.04) inset,
+      0 24px 48px -30px rgba(0, 0, 0, 0.8);
   }
 
-  .surface-card:hover {
-    @apply border-primary/25 shadow-[0_18px_40px_-28px_rgba(22,90,64,0.45)] -translate-y-0.5;
+  .card-lift {
+    @apply transition duration-300 ease-out;
   }
 
-  .dark .surface-card {
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03);
+  .card-lift:hover {
+    @apply -translate-y-1 border-primary/30;
+    box-shadow: 0 30px 60px -34px color-mix(in oklab, var(--ws-primary) 60%, transparent);
   }
 
-  .dark .surface-card:hover {
-    box-shadow: 0 22px 44px -28px rgba(0, 0, 0, 0.7);
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, var(--ws-primary) 9%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, var(--ws-primary) 9%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
   }
 
-  .hero-frame {
-    @apply relative overflow-hidden rounded-sm border border-border/70 bg-clinic-sage shadow-[0_30px_60px_-40px_rgba(22,90,64,0.55)];
+  .bg-navy-mesh {
+    background:
+      radial-gradient(60% 80% at 10% 0%, rgba(63, 208, 218, 0.28), transparent 60%),
+      radial-gradient(50% 70% at 100% 100%, rgba(215, 38, 61, 0.32), transparent 60%),
+      linear-gradient(135deg, #0a2a6e 0%, #071a47 55%, #050f2d 100%);
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%);
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transition: transform 0.7s ease;
+  }
+
+  .shine:hover::after {
+    transform: translateX(120%);
   }
 }
 
-@keyframes review-fade {
+@keyframes marquee {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    transform: translateX(0);
   }
   to {
-    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
     transform: translateY(0);
   }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down 0.25s ease-out;
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
 }

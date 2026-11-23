@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Clock3, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,6 +21,8 @@ import {
   specialties,
   whatsappLink,
 } from "@/data/site";
+
+const fieldClass = "min-h-12 rounded-2xl border-input bg-background px-4 text-base sm:text-sm";
 
 export default function Contact() {
   const [specialty, setSpecialty] = useState("");
@@ -44,7 +47,9 @@ export default function Contact() {
       `Phone: ${phone}`,
       `Specialty: ${specialty}`,
       message ? `Message: ${message}` : "",
-    ].filter(Boolean).join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
 
     window.open(whatsappLink(text), "_blank", "noopener,noreferrer");
   }
@@ -57,67 +62,108 @@ export default function Contact() {
         description="Find us in Kanaka Nagar, Hebbal — or message WhatsApp with your details ready to send."
         actions={
           <div className="flex flex-wrap gap-3">
-            <Button asChild className="min-h-11 rounded-sm">
+            <Button asChild variant="accent" size="lg">
               <a href={whatsappLink("Hello, I would like to get in touch with Wellstar.")} target="_blank" rel="noreferrer">
                 WhatsApp <ArrowUpRight aria-hidden="true" />
               </a>
             </Button>
-            <Button asChild variant="outline" className="min-h-11 rounded-sm">
-              <a href={PHONE_URL}><Phone aria-hidden="true" /> +91 63620 64109</a>
+            <Button asChild variant="outline" size="lg">
+              <a href={PHONE_URL}>
+                <Phone aria-hidden="true" /> +91 63620 64109
+              </a>
             </Button>
           </div>
         }
       />
 
-      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-12">
-          <Reveal className="flex flex-col gap-6">
-            <div className="flex gap-4 border-b border-border pb-5">
-              <MapPin aria-hidden="true" className="mt-1 size-5 shrink-0 text-primary" />
-              <div>
-                <h2 className="font-semibold">Address</h2>
-                <p className="mt-1 leading-6 text-muted-foreground">{CLINIC_ADDRESS}, IN.</p>
-                <a href={MAPS_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                  Directions <ArrowUpRight aria-hidden="true" className="size-4" />
-                </a>
-              </div>
-            </div>
-            <div className="flex gap-4 border-b border-border pb-5">
-              <Phone aria-hidden="true" className="mt-1 size-5 shrink-0 text-primary" />
-              <div>
-                <h2 className="font-semibold">Call the clinic</h2>
-                <a href={PHONE_URL} className="mt-1 inline-block text-muted-foreground">+91 63620 64109</a>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Pharmacy delivery: <a href={PHARMACY_DELIVERY_URL} className="font-medium text-primary">+91 63637 78957</a>
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4 border-b border-border pb-5">
-              <Clock3 aria-hidden="true" className="mt-1 size-5 shrink-0 text-primary" />
-              <div>
-                <h2 className="font-semibold">Opening hours</h2>
-                <p className="mt-1 text-muted-foreground">Mon–Sat: 8:00 AM – 10:00 PM</p>
-                <p className="mt-1 text-muted-foreground">Sunday: 8:00 AM – 1:00 PM</p>
-              </div>
-            </div>
-            <div>
-              <h2 className="font-semibold">Email & social</h2>
-              <a href={`mailto:${EMAIL}`} className="mt-2 block text-muted-foreground">{EMAIL}</a>
-              <div className="mt-3 flex flex-wrap gap-3">
-                <Button asChild variant="outline" className="min-h-10 rounded-sm">
-                  <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram <ArrowUpRight aria-hidden="true" /></a>
-                </Button>
-                <Button asChild variant="outline" className="min-h-10 rounded-sm">
-                  <a href={FACEBOOK_URL} target="_blank" rel="noreferrer">Facebook <ArrowUpRight aria-hidden="true" /></a>
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal className="overflow-hidden rounded-sm border border-border bg-secondary">
+      <section className="section-y border-t border-border bg-surface">
+        <div className="container-x grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+          <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1" gap={0.07}>
+            <StaggerItem>
+              <SpotlightCard className="card-glass h-full p-6">
+                <div className="flex gap-4">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary text-primary-foreground">
+                    <MapPin aria-hidden="true" className="size-5" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-lg font-extrabold">Address</h2>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{CLINIC_ADDRESS}, IN.</p>
+                    <a href={MAPS_URL} target="_blank" rel="noreferrer" className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-primary">
+                      Directions <ArrowUpRight aria-hidden="true" className="size-4" />
+                    </a>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </StaggerItem>
+            <StaggerItem>
+              <SpotlightCard className="card-glass h-full p-6">
+                <div className="flex gap-4">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-red text-white">
+                    <Phone aria-hidden="true" className="size-5" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-lg font-extrabold">Call the clinic</h2>
+                    <a href={PHONE_URL} className="mt-1 inline-block font-display text-xl font-black text-foreground hover:text-primary">
+                      +91 63620 64109
+                    </a>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Pharmacy delivery:{" "}
+                      <a href={PHARMACY_DELIVERY_URL} className="font-bold text-primary">
+                        +91 63637 78957
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </StaggerItem>
+            <StaggerItem>
+              <SpotlightCard className="card-glass h-full p-6">
+                <div className="flex gap-4">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-brand-teal text-white">
+                    <Clock3 aria-hidden="true" className="size-5" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-lg font-extrabold">Opening hours</h2>
+                    <p className="mt-1 text-sm text-muted-foreground">Mon–Sat: 8:00 AM – 10:00 PM</p>
+                    <p className="mt-1 text-sm text-muted-foreground">Sunday: 8:00 AM – 1:00 PM</p>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </StaggerItem>
+            <StaggerItem>
+              <SpotlightCard className="card-glass h-full p-6">
+                <div className="flex gap-4">
+                  <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-secondary text-primary">
+                    <Mail aria-hidden="true" className="size-5" />
+                  </span>
+                  <div>
+                    <h2 className="font-display text-lg font-extrabold">Email & social</h2>
+                    <a href={`mailto:${EMAIL}`} className="mt-1 block text-sm text-muted-foreground hover:text-primary">
+                      {EMAIL}
+                    </a>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <Button asChild variant="outline">
+                        <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+                          Instagram <ArrowUpRight aria-hidden="true" />
+                        </a>
+                      </Button>
+                      <Button asChild variant="outline">
+                        <a href={FACEBOOK_URL} target="_blank" rel="noreferrer">
+                          Facebook <ArrowUpRight aria-hidden="true" />
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+            </StaggerItem>
+          </Stagger>
+
+          <Reveal delay={0.1} className="relative min-h-80 overflow-hidden rounded-[2rem] border border-border shadow-xl">
             <iframe
               title="Map showing Wellstar Polyclinic & Diagnostic Centre in Hebbal, Bengaluru"
               src={`https://www.google.com/maps?q=${encodeURIComponent(CLINIC_ADDRESS)}&output=embed`}
-              className="aspect-[4/3] min-h-72 w-full border-0 lg:aspect-auto lg:h-full lg:min-h-[27rem]"
+              className="absolute inset-0 size-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
@@ -126,61 +172,91 @@ export default function Contact() {
         </div>
       </section>
 
-      <section id="contact-form" className="border-t border-border bg-clinic-surface px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+      <section id="contact-form" className="section-y scroll-mt-24">
+        <div className="container-x grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
-            <p className="section-kicker">Contact form</p>
-            <h2 className="section-title mt-3">Let’s find the right next step.</h2>
-            <p className="mt-4 leading-7 text-muted-foreground">Share a few details and WhatsApp opens with your message ready.</p>
+            <p className="kicker">Contact form</p>
+            <h2 className="section-title mt-4">
+              Let’s find the <span className="text-gradient">right next step.</span>
+            </h2>
+            <p className="mt-5 leading-7 text-muted-foreground">Share a few details and WhatsApp opens with your message ready.</p>
           </Reveal>
-          <Reveal className="rounded-sm border border-border bg-card p-5 sm:p-8">
+          <Reveal delay={0.1} className="card-glass p-6 sm:p-9">
             <form onSubmit={handleContactSubmit} className="grid gap-5">
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="grid gap-2">
-                  <Label htmlFor="contact-name">Name</Label>
-                  <Input id="contact-name" name="name" autoComplete="name" placeholder="Name" required className="min-h-11 rounded-sm bg-background" />
+                  <Label htmlFor="contact-name" className="font-semibold">Name</Label>
+                  <Input id="contact-name" name="name" autoComplete="name" placeholder="Name" required className={fieldClass} />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="contact-phone">Phone Number</Label>
-                  <Input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="Phone Number" required className="min-h-11 rounded-sm bg-background" />
+                  <Label htmlFor="contact-phone" className="font-semibold">Phone Number</Label>
+                  <Input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="Phone Number" required className={fieldClass} />
                 </div>
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="contact-specialty">Specialty</Label>
-                <Select value={specialty} onValueChange={(value) => { setSpecialty(value); setFormError(""); }}>
-                  <SelectTrigger id="contact-specialty" aria-required="true" aria-invalid={Boolean(formError)} className="min-h-11 rounded-sm bg-background">
+                <Label htmlFor="contact-specialty" className="font-semibold">Specialty</Label>
+                <Select
+                  value={specialty}
+                  onValueChange={(value) => {
+                    setSpecialty(value);
+                    setFormError("");
+                  }}
+                >
+                  <SelectTrigger
+                    id="contact-specialty"
+                    aria-required="true"
+                    aria-invalid={Boolean(formError)}
+                    aria-describedby={formError ? "contact-specialty-error" : undefined}
+                    className={fieldClass}
+                  >
                     <SelectValue placeholder="Choose a specialty" />
                   </SelectTrigger>
                   <SelectContent>
-                    {specialties.map((item) => <SelectItem key={item.title} value={item.title}>{item.title}</SelectItem>)}
+                    {specialties.map((item) => (
+                      <SelectItem key={item.title} value={item.title}>
+                        {item.title}
+                      </SelectItem>
+                    ))}
                     <SelectItem value="Lab & Diagnostic">Lab & Diagnostic</SelectItem>
                     <SelectItem value="Medicines & Supplies">Medicines & Supplies</SelectItem>
                     <SelectItem value="Other">Other</SelectItem>
                   </SelectContent>
                 </Select>
+                {formError && (
+                  <p id="contact-specialty-error" role="alert" className="text-sm font-medium text-destructive">
+                    {formError}
+                  </p>
+                )}
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="contact-message">Message</Label>
-                <Textarea id="contact-message" name="message" placeholder="Message" rows={4} className="rounded-sm bg-background" />
+                <Label htmlFor="contact-message" className="font-semibold">Message</Label>
+                <Textarea id="contact-message" name="message" placeholder="Message" rows={4} className="rounded-2xl bg-background px-4 py-3 text-base sm:text-sm" />
               </div>
-              {formError && <p role="alert" className="text-sm text-destructive">{formError}</p>}
-              <Button type="submit" className="min-h-12 w-full rounded-sm sm:w-fit sm:px-6">Continue to WhatsApp <ArrowUpRight aria-hidden="true" /></Button>
+              <Button type="submit" variant="accent" size="lg" className="w-full sm:w-fit">
+                Continue to WhatsApp <ArrowUpRight aria-hidden="true" />
+              </Button>
             </form>
           </Reveal>
         </div>
       </section>
 
-      <section className="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
+      <section className="section-y border-t border-border bg-surface">
+        <div className="container-x grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
           <Reveal>
-            <p className="section-kicker">FAQ</p>
-            <h2 className="section-title mt-3">A few helpful answers.</h2>
+            <p className="kicker">FAQ</p>
+            <h2 className="section-title mt-4">A few helpful answers.</h2>
           </Reveal>
-          <Reveal>
-            <Accordion type="single" collapsible className="w-full">
+          <Reveal delay={0.1}>
+            <Accordion type="single" collapsible className="grid w-full gap-3">
               {questions.map((item, index) => (
-                <AccordionItem key={item.question} value={`question-${index}`} className="border-border">
-                  <AccordionTrigger className="py-5 text-left text-base hover:no-underline">{item.question}</AccordionTrigger>
+                <AccordionItem
+                  key={item.question}
+                  value={`question-${index}`}
+                  className="card-glass overflow-hidden border px-6 data-[state=open]:border-primary/40"
+                >
+                  <AccordionTrigger className="min-h-14 py-5 text-left font-display text-lg font-bold hover:no-underline">
+                    {item.question}
+                  </AccordionTrigger>
                   <AccordionContent className="max-w-2xl pb-5 text-sm leading-6 text-muted-foreground">{item.answer}</AccordionContent>
                 </AccordionItem>
               ))}

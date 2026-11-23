@@ -164,12 +164,22 @@ export const diagnostics = [
   { title: "Partner imaging", description: "X-rays and ultrasounds are arranged at a nearby tied-up centre." },
 ];
 
+export type PackageAddOn = {
+  test: string;
+  price: number;
+};
+
 export type HealthPackage = {
   name: string;
   tests: string[];
+  addOns?: PackageAddOn[];
   originalPrice: number;
   offerPrice: number;
 };
+
+export const PACKAGES_PHONE_URL = "tel:+916362064109";
+export const PACKAGES_PHONE_DISPLAY = "6362064109";
+export const PACKAGES_TAGLINE = "Specially Curated by Doctors";
 
 export const generalHealthPackages: HealthPackage[] = [
   {
@@ -188,64 +198,68 @@ export const generalHealthPackages: HealthPackage[] = [
     name: "Basic Health",
     tests: ["CBC", "Creatinine", "Urine Routine", "Total Cholesterol", "Triglycerides", "RBS", "TSH"],
     originalPrice: 2700,
-    offerPrice: 1499,
-  },
-  {
-    name: "Comprehensive Health",
-    tests: ["Complete Hemogram", "RFT", "Urine Routine", "LFT", "Lipid Profile", "FBS", "PPBS", "HbA1C", "TFT", "Vitamin B12", "Vitamin D", "ECG"],
-    originalPrice: 6970,
-    offerPrice: 3999,
-  },
-  {
-    name: "Anemia Health",
-    tests: ["Complete Hemogram", "Iron Profile", "LFT - Basic", "Vitamin B12", "Blood Group", "RH Typing"],
-    originalPrice: 3320,
-    offerPrice: 2199,
+    offerPrice: 1409,
   },
   {
     name: "Diabetes Health",
-    tests: ["FBS", "PPBS", "HbA1C", "Creatinine", "Urine Routine", "Lipid Profile", "Vitamin B12"],
-    originalPrice: 3200,
+    tests: ["FBS", "PPBS", "HbA1c", "Creatinine", "Urine Routine", "Lipid Profile", "Vitamin B12"],
+    originalPrice: 3290,
     offerPrice: 1799,
+  },
+  {
+    name: "Anemia Health",
+    tests: ["Complete Hemogram", "Iron Profile", "LFT - Basic", "Vitamin B12", "Blood Group & Rh Typing"],
+    originalPrice: 3320,
+    offerPrice: 2299,
+  },
+  {
+    name: "Comprehensive Health",
+    tests: ["Complete Hemogram", "RFT", "Urine Routine", "LFT", "Lipid Profile", "FBS", "PPBS", "HbA1c", "TFT", "Vitamin B12", "Vitamin D", "ECG"],
+    originalPrice: 6870,
+    offerPrice: 3999,
   },
 ];
 
 export const womensHealthPackages: HealthPackage[] = [
   {
     name: "Antenatal Health",
-    tests: ["CBC", "Blood Group & RH Typing", "Urine Routine", "HbA1C", "TSH", "Anti HCV", "HBsAg", "HIV", "VDRL", "Vitamin B12", "Vitamin D"],
+    tests: ["CBC", "Blood Group & Rh Typing", "Urine Routine", "HbA1c", "TSH", "Anti HCV", "HBsAg", "HIV", "VDRL", "Vitamin B12", "Vitamin D"],
+    addOns: [{ test: "β-HCG", price: 400 }],
     originalPrice: 5970,
     offerPrice: 3999,
   },
   {
     name: "Antenatal Health II",
-    tests: ["CBC", "Urine Routine", "TSH", "OGTT", "HbA1C"],
+    tests: ["CBC", "Urine Routine", "TSH", "OGTT"],
+    addOns: [{ test: "HbA1c", price: 350 }],
+    originalPrice: 1420,
+    offerPrice: 999,
+  },
+  {
+    name: "Women's Health",
+    tests: ["CBC", "Creatinine", "Urine Routine", "TSH", "HbA1c", "Vitamin B12", "Vitamin D"],
     originalPrice: 4370,
     offerPrice: 2199,
   },
   {
     name: "Infertility / PCOS Health",
-    tests: ["CBC", "Urine Routine", "TSH", "HbA1C", "PRL", "AMH", "Vitamin B12", "Vitamin D"],
+    tests: ["CBC", "Urine Routine", "TSH", "HbA1c", "PRL", "AMH", "Vitamin B12", "Vitamin D"],
     originalPrice: 6445,
     offerPrice: 4299,
   },
   {
-    name: "Women's Health",
-    tests: ["CBC", "Creatinine", "Urine Routine", "TSH", "HbA1C", "Vitamin B12", "Vitamin D"],
-    originalPrice: 4370,
-    offerPrice: 2199,
+    name: "Basic Fertility",
+    tests: ["CBC", "ESR", "FBS / RBS", "Urine Routine", "TFT", "HbA1c", "PRL"],
+    addOns: [{ test: "FSH", price: 450 }],
+    originalPrice: 2070,
+    offerPrice: 1799,
   },
   {
     name: "Comprehensive Fertility",
-    tests: ["CBC", "ESR", "Urine Routine", "FBS / RBS", "TFT", "HbA1C", "LH", "PRL", "FSH", "AMH", "Vitamin B12", "Vitamin D", "Insulin"],
-    originalPrice: 9055,
+    tests: ["CBC", "ESR", "Urine Routine", "FBS / RBS", "TFT", "HbA1c", "LH", "PRL", "FSH", "AMH", "Vitamin B12", "Vitamin D"],
+    addOns: [{ test: "Insulin", price: 600 }],
+    originalPrice: 9095,
     offerPrice: 6199,
-  },
-  {
-    name: "Basic Fertility",
-    tests: ["CBC", "ESR", "FBS / RBS", "Urine Routine", "TFT", "HbA1C", "PRL", "FSH"],
-    originalPrice: 3070,
-    offerPrice: 1799,
   },
 ];
 

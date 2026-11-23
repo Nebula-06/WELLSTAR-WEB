@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { MotionConfig } from 'motion/react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/SiteLayout'
 import About from '@/pages/About'
@@ -29,6 +30,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -44,5 +46,6 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </MotionConfig>
   )
 }

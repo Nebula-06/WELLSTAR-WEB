@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Phone } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type SectionActionsProps = {
@@ -18,15 +18,15 @@ export function SectionActions({
   className = "",
 }: SectionActionsProps) {
   return (
-    <div className={`mt-5 flex flex-wrap gap-3 ${className}`}>
-      <Button asChild variant="outline" className="min-h-11 rounded-sm">
+    <div className={`mt-6 flex flex-wrap gap-2.5 ${className}`}>
+      <Button asChild variant="outline">
         <Link to={detailsTo}>
           {detailsLabel} <ArrowUpRight aria-hidden="true" />
         </Link>
       </Button>
-      <Button asChild className="min-h-11 rounded-sm">
+      <Button asChild>
         <a href={whatsappHref} target="_blank" rel="noreferrer">
-          <Phone aria-hidden="true" /> {whatsappLabel}
+          <MessageCircle aria-hidden="true" /> {whatsappLabel}
         </a>
       </Button>
     </div>
