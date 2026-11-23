@@ -1,6 +1,5 @@
 import doctorShakeeb from "@/assets/doctor-shakeeb.jpg";
 import doctorMehnaz from "@/assets/doctor-mehnaz.jpg";
-import doctorRavi from "@/assets/doctor-ravi.jpg";
 
 export const WHATSAPP_URL = "https://wa.me/916362064109";
 export const PHONE_URL = "tel:+916362064109";
@@ -67,7 +66,7 @@ export const specialties = [
   {
     id: "orthopedics",
     title: "Orthopedics",
-    lead: "Bone, joint and muscle care with Dr. Raviraj Tantry.",
+    lead: "Bone, joint and muscle care.",
     summary: "Fractures, sports injuries, arthritis and spine-related concerns.",
     description:
       "Our Orthopedician specialises in comprehensive musculoskeletal care — helping patients regain mobility and long-term wellbeing through personalised, evidence-based plans.",
@@ -133,18 +132,6 @@ export const doctors = [
       "After completing her MBBS, she pursued a DNB in Obstetrics & Gynecology, followed by FMAS & DMAS and ICRS-certified Robotic Surgery training for safer, faster and more precise outcomes.",
       "She has served at the High-Risk Pregnancy Unit at Bhagwan Mahaveer Jain Hospital, Koshy’s Hospital, is a Visiting Consultant at Cloudnine Hospital, and currently practices as a Consultant at Motherhood Hospital.",
       "Deeply committed to volunteer work through women’s health camps, her approach is empathetic, evidence-based and holistic — integrating nutrition, exercise therapy and everyday herbs into personalised treatment plans. At Wellstar she leads the Department of Obstetrics & Gynecology.",
-    ],
-  },
-  {
-    name: "Dr. Ravi Raj Tantry",
-    credentials: "MBBS, MD (Orthopedics)",
-    specialty: "Consultant Orthopedician",
-    image: doctorRavi,
-    summary: "Bone, joint and muscle specialist for injuries, arthritis and rehabilitation.",
-    bio: [
-      "Dr. Raviraj Tantry specialises in the comprehensive management of bone, joint and muscle health at Wellstar Polyclinic & Diagnostic Centre.",
-      "He provides expert consultation and treatment for acute injuries such as fractures, sports-related trauma and ligament tears, as well as chronic conditions including osteoarthritis, joint pain, back pain and spinal health issues.",
-      "Care includes both surgical and non-surgical approaches, first-aid for trauma, wound management and post-injury rehabilitation — with personalised, evidence-based plans aimed at restoring mobility and quality of life.",
     ],
   },
 ];

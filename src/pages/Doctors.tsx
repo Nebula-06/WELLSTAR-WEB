@@ -28,7 +28,7 @@ export default function Doctors() {
       />
 
       <section className="section-y border-t border-border bg-surface">
-        <Stagger className="container-x grid items-start gap-6 lg:grid-cols-3" gap={0.12}>
+        <Stagger className="mx-auto grid w-full max-w-5xl items-start gap-6 px-4 sm:px-8 md:grid-cols-2 lg:px-10" gap={0.12}>
           {doctors.map((doctor) => {
             const isOpen = expandedDoctor === doctor.name;
             const bioId = `bio-${doctor.name.replace(/\W+/g, "-").toLowerCase()}`;
