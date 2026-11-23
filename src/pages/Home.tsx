@@ -23,6 +23,7 @@ import { SectionActions } from "@/components/SectionActions";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
 import { doctors, PHONE_URL, specialties, whatsappLink } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -119,6 +120,10 @@ function RotatingBadge() {
 }
 
 export default function Home() {
+  usePageMeta(
+    "Wellstar Polyclinic & Diagnostic Centre | Hebbal, Bengaluru",
+    "Multispecialty clinic in Hebbal, Bengaluru — physician, gynecology, orthopedics, dermatology and day care, with an on-site lab, health packages and pharmacy delivery.",
+  );
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);

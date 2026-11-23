@@ -4,10 +4,15 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
 import { teamRoles, values, whatsappLink, PHONE_URL } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const valueIcons: LucideIcon[] = [Building2, ShieldCheck, Microscope, MonitorSmartphone];
 
 export default function About() {
+  usePageMeta(
+    "About Wellstar | Polyclinic & Diagnostic Centre, Hebbal",
+    "Wellstar Polyclinic & Diagnostic Centre in Hebbal, Bengaluru — specialists, diagnostics and pharmacy under one roof, where expertise meets empathy.",
+  );
   return (
     <main>
       <PageHero

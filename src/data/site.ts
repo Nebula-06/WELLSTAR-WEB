@@ -1,14 +1,34 @@
 import doctorShakeeb from "@/assets/doctor-shakeeb.jpg";
 import doctorMehnaz from "@/assets/doctor-mehnaz.jpg";
 
-export const WHATSAPP_URL = "https://wa.me/916362064109";
+export const SITE_URL = "https://wellstarpolyclinic.com";
+export const WHATSAPP_URL ="https://wa.me/916362064109";
 export const PHONE_URL = "tel:+916362064109";
 export const PHARMACY_DELIVERY_URL = "tel:+916363778957";
-export const EMAIL = "frontdesk.wellstar.in";
+export const EMAIL = "frontdesk@wellstar.in";
 export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61583266480205";
 export const INSTAGRAM_URL = "https://www.instagram.com/wellstarpolyclinic_2025/";
 export const CLINIC_ADDRESS = "45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru, Karnataka 560045";
 export const MAPS_URL = "https://maps.google.com/?q=45%2F2%2C+8th+A+Cross+Rd%2C+Kanaka+Nagar%2C+Hebbal%2C+Bengaluru+560045";
+
+export const EMERGENCY_NOTE =
+  "In a medical emergency, call 108 or go to the nearest hospital emergency department.";
+export const EMERGENCY_URL = "tel:108";
+
+/*
+ * Google reviews. Set these in `.env.local` (see `.env.example`):
+ *  - VITE_GOOGLE_PLACE_ID: the clinic's Google Place ID (enables live reviews + "Write a review").
+ *  - VITE_GOOGLE_MAPS_API_KEY: a browser key with "Places API (New)" + "Maps JavaScript API",
+ *    restricted to the website's domain. Without it, the curated reviews below are shown.
+ */
+export const GOOGLE_PLACE_ID: string = import.meta.env.VITE_GOOGLE_PLACE_ID ?? "";
+export const GOOGLE_MAPS_API_KEY: string = import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? "";
+export const GOOGLE_REVIEWS_URL = GOOGLE_PLACE_ID
+  ? `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`
+  : "https://www.google.com/maps/search/?api=1&query=Wellstar+Polyclinic+%26+Diagnostic+Centre+Hebbal+Bengaluru";
+export const GOOGLE_WRITE_REVIEW_URL = GOOGLE_PLACE_ID
+  ? `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`
+  : "";
 
 export function whatsappLink(message: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
@@ -111,6 +131,7 @@ export const doctors = [
   {
     name: "Dr. Shakeeb Ahmer",
     credentials: "MBBS, DNB (Internal Medicine), MRCP (UK)",
+    registration: "KMC Reg. No. 0001593",
     specialty: "Consultant Physician & Internal Medicine Specialist",
     image: doctorShakeeb,
     summary: "Internal medicine specialist with over a decade of experience and a special interest in diabetes care.",
@@ -124,6 +145,7 @@ export const doctors = [
   {
     name: "Dr. Mehnaz Rashid",
     credentials: "MBBS, DNB (Obstetrics & Gynecology), FMAS, DMAS, ICRS (Robotic Surgery)",
+    registration: "KMC Reg. No. 0000589",
     specialty: "Consultant Obstetrician & Gynecologist",
     image: doctorMehnaz,
     summary: "Specialist in high-risk pregnancy, minimally invasive surgery and reproductive health.",
@@ -266,30 +288,35 @@ export const values = [
   { title: "Online consultations", description: "In-clinic visits and virtual consults available via Apollo 24|7." },
 ];
 
-export const testimonials = [
+export type Testimonial = {
+  name: string;
+  quote: string;
+  rating?: number;
+  when?: string;
+  url?: string;
+};
+
+/* Real Google reviews, quoted word for word (long ones trimmed with “…”). Shown when live reviews are not configured. */
+export const testimonials: Testimonial[] = [
   {
     name: "Vivek Chaudhary",
-    quote: "Dr Shakeeb is an excellent doctor who listens carefully, explains things properly and treats with compassion. The treatment plan was effective. Highly recommended!",
+    quote: "Dr Shakeeb is an excellent doctor who listens carefully, explains things properly and treats with compassion and the treatment plan was effective. Highly recommended!",
   },
   {
     name: "Rakheeba Y",
-    quote: "Great experience. Dr. Mehnaz is a best doctor and she is a good listener. She has healing hands. Overall great experience.",
+    quote: "Great experience. Dr.Mehnaz mam is a best doctor and she is good listener.she has healing hands.over all great experience",
   },
   {
     name: "Tabrez Khan",
-    quote: "Consulted Dr Shakeeb for my father who is diabetic. Highly professional, helpful in emergencies, and gave us hope when others had given up. Grateful for his continuous support.",
+    quote: "Consulted Dr Shakeeb for my father who is diabetic and had some other serious issues. The doctor is highly professional and always helpful and supportive in an emergency situation. … I am very much grateful and thankful to him for his continuous support and guidance in this tough situation.",
   },
   {
     name: "Aliya Ayub",
-    quote: "After consulting Dr. Shakeeb Ahmer, my diabetic condition came under control. Very good experience — recommend for all.",
+    quote: "I was suffering from diabetes starting now after consulting dr. shakeeb ahmer my diabetic condition as come to control it was very good after consulting doctor recommend for all",
   },
   {
-    name: "Farheen S.",
-    quote: "Clinic is clean, staff are warm, and lab reports came on time. Booking on WhatsApp made everything simple for our family.",
-  },
-  {
-    name: "Mohammed R.",
-    quote: "Pharmacy delivery within Hebbal was quick and the medicines matched the prescription exactly. Reliable neighbourhood clinic.",
+    name: "Noufil Ahmed Kazi",
+    quote: "Dr Shakeeb, best physician around.",
   },
 ];
 
@@ -309,6 +336,10 @@ export const questions = [
   {
     question: "What lab tests are available?",
     answer: "We offer blood and urine tests, allergy testing, sexual health screening, full-body and women’s health packages, hormone and vitamin panels, diabetes profile, RFT/LFT, fever panels, ECG, lipid and cardiac profile, and CTG/NST. X-ray and ultrasound are arranged at a nearby tied-up centre.",
+  },
+  {
+    question: "Do you collect samples from home?",
+    answer: "Yes. We collect lab samples from home — book on WhatsApp or call 6362064109. Tests such as FBS, lipid profile and OGTT usually need 8–12 hours of fasting (water is fine); our team will confirm the preparation when you book.",
   },
   {
     question: "Do you deliver medicines?",

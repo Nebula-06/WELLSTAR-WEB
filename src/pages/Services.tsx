@@ -6,6 +6,7 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { specialties, whatsappLink } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const specialtyIcons: Record<string, LucideIcon> = {
   "general-physician": Stethoscope,
@@ -16,6 +17,10 @@ const specialtyIcons: Record<string, LucideIcon> = {
 };
 
 export default function Services() {
+  usePageMeta(
+    "Medical Services | Wellstar Polyclinic, Hebbal",
+    "General physician & internal medicine, gynecology & obstetrics, orthopedics, dermatology and day care at Wellstar Polyclinic, Hebbal, Bengaluru.",
+  );
   const [activeId, setActiveId] = useState(specialties[0]?.id ?? "");
 
   useEffect(() => {

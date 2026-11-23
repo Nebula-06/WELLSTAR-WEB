@@ -5,10 +5,15 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
 import { pharmacyCategories, pharmacyPoints, PHARMACY_DELIVERY_URL, whatsappLink } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const pointIcons: LucideIcon[] = [ShieldCheck, BadgeIndianRupee, Truck, Stethoscope];
 
 export default function Pharmacy() {
+  usePageMeta(
+    "Pharmacy & Medicine Home Delivery | Wellstar, Hebbal",
+    "WHO-GMP quality medicines, affordable pricing and doctor-supervised dispensing, with home delivery within 2 km of Wellstar, Hebbal. Call 63637 78957.",
+  );
   return (
     <main>
       <PageHero

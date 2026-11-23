@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ArrowUpRight, Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Phone, Siren } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PageHero } from "@/components/PageHero";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
@@ -12,6 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   CLINIC_ADDRESS,
   EMAIL,
+  EMERGENCY_NOTE,
+  EMERGENCY_URL,
   FACEBOOK_URL,
   INSTAGRAM_URL,
   MAPS_URL,
@@ -21,10 +23,15 @@ import {
   specialties,
   whatsappLink,
 } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const fieldClass = "min-h-12 rounded-2xl border-input bg-background px-4 text-base sm:text-sm";
 
 export default function Contact() {
+  usePageMeta(
+    "Contact & Directions | Wellstar Polyclinic, Hebbal",
+    "Visit Wellstar Polyclinic at 45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru. Mon–Sat 8 AM–10 PM, Sun 8 AM–1 PM. Call +91 63620 64109.",
+  );
   const [specialty, setSpecialty] = useState("");
   const [formError, setFormError] = useState("");
 
@@ -77,6 +84,19 @@ export default function Contact() {
       />
 
       <section className="section-y border-t border-border bg-surface">
+        <Reveal className="container-x mb-6">
+          <div role="note" className="flex flex-col gap-3 rounded-[1.5rem] border border-brand-red/40 bg-brand-red/10 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="flex items-start gap-3 text-sm font-semibold leading-6 text-foreground">
+              <Siren aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-brand-red" />
+              {EMERGENCY_NOTE}
+            </p>
+            <Button asChild variant="accent" className="shrink-0">
+              <a href={EMERGENCY_URL}>
+                <Phone aria-hidden="true" /> Call 108
+              </a>
+            </Button>
+          </div>
+        </Reveal>
         <div className="container-x grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1" gap={0.07}>
             <StaggerItem>

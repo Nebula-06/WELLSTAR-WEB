@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, ChevronDown, GraduationCap } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, ChevronDown, GraduationCap } from "lucide-react";
 import doctorsHero from "@/assets/doctors-hero.webp";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { doctors, whatsappLink } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function Doctors() {
+  usePageMeta(
+    "Our Doctors | Wellstar Polyclinic, Hebbal",
+    "Meet Dr. Shakeeb Ahmer (Internal Medicine) and Dr. Mehnaz Rashid (Obstetrics & Gynecology) at Wellstar Polyclinic, Hebbal. Book on WhatsApp.",
+  );
   const [expandedDoctor, setExpandedDoctor] = useState<string | null>(doctors[0]?.name ?? null);
 
   return (
@@ -53,6 +58,10 @@ export default function Doctors() {
                     <p className="flex gap-2.5 text-sm font-semibold leading-6 text-primary">
                       <GraduationCap aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
                       {doctor.credentials}
+                    </p>
+                    <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-brand-teal/40 bg-accent px-3 py-1 text-xs font-bold tracking-wide text-accent-foreground">
+                      <BadgeCheck aria-hidden="true" className="size-4" />
+                      {doctor.registration}
                     </p>
 
                     <motion.div layout className="mt-4 text-sm leading-6 text-muted-foreground">

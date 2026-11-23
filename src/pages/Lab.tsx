@@ -4,10 +4,13 @@ import {
   Activity,
   ArrowUpRight,
   Baby,
+  Clock3,
   Droplets,
+  FileText,
   FlaskConical,
   Flower2,
   HeartPulse,
+  House,
   Microscope,
   Phone,
   ScanLine,
@@ -31,6 +34,7 @@ import {
   whatsappLink,
   womensHealthPackages,
 } from "@/data/site";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const diagnosticIcons: Record<string, LucideIcon> = {
   "Blood & Urine Tests": Droplets,
@@ -54,10 +58,33 @@ const tabs = [
 
 type TabId = (typeof tabs)[number]["id"];
 
-const allPackages = [...generalHealthPackages, ...womensHealthPackages];
+const labInfo: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: House,
+    title: "Home sample collection",
+    description: `We collect samples from home. Book on WhatsApp or call ${PACKAGES_PHONE_DISPLAY}.`,
+  },
+  {
+    icon: Clock3,
+    title: "Fasting tests",
+    description:
+      "FBS, lipid profile and OGTT usually need 8–12 hours of fasting (water is fine). PPBS is taken 2 hours after a meal. We’ll confirm when you book.",
+  },
+  {
+    icon: FileText,
+    title: "Digital health records",
+    description: "Accurate, efficient testing with digital health records for seamless follow-up care.",
+  },
+];
+
+const allPackages =[...generalHealthPackages, ...womensHealthPackages];
 const lowestPrice = Math.min(...allPackages.map((pkg) => pkg.offerPrice));
 
 export default function Lab() {
+  usePageMeta(
+    "Health Packages from ₹999 & Lab Tests | Wellstar, Hebbal",
+    "Doctor-curated general and women’s health packages from ₹999, home sample collection, blood tests, ECG and CTG/NST at Wellstar Diagnostic Centre, Hebbal.",
+  );
   const [activeTab, setActiveTab] = useState<TabId>("general");
   const current = tabs.find((tab) => tab.id === activeTab) ?? tabs[0];
 
@@ -164,6 +191,20 @@ export default function Lab() {
               </motion.div>
             </AnimatePresence>
           </div>
+
+          <Stagger className="mt-14 grid gap-4 md:grid-cols-3" gap={0.08}>
+            {labInfo.map((item) => (
+              <StaggerItem key={item.title} className="card-glass flex gap-4 p-6">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-teal text-white">
+                  <item.icon aria-hidden="true" className="size-6" />
+                </span>
+                <div>
+                  <h3 className="font-display text-lg font-extrabold text-foreground">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{item.description}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
 
           <Reveal className="mt-14 flex flex-col items-center gap-4 text-center">
             <Button asChild variant="accent" size="lg">

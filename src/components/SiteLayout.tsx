@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Clock3, MapPin, Menu, MessageCircle, Moon, Phone, Sun, Truck, X } from "lucide-react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Menu, MessageCircle, Moon, Phone, Siren, Sun, Truck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EcgLine } from "@/components/EcgLine";
 import { useTheme } from "@/hooks/useTheme";
 import logoImage from "@/assets/wellstar-logo.jpg";
-import { CLINIC_ADDRESS, MAPS_URL, navItems, PHARMACY_DELIVERY_URL, PHONE_URL, whatsappLink } from "@/data/site";
+import { CLINIC_ADDRESS, EMAIL, EMERGENCY_URL, MAPS_URL, navItems, PHARMACY_DELIVERY_URL, PHONE_URL, whatsappLink } from "@/data/site";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -215,12 +215,28 @@ export function SiteLayout() {
                 <span className="leading-6">Mon–Sat 8 AM–10 PM · Sun 8 AM–1 PM</span>
               </li>
               <li className="flex gap-3">
+                <Mail aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#3fd0da]" />
+                <a href={`mailto:${EMAIL}`} className="leading-6 hover:text-white">
+                  {EMAIL}
+                </a>
+              </li>
+              <li className="flex gap-3">
                 <Truck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#3fd0da]" />
                 <span className="leading-6">
                   Pharmacy delivery:{" "}
                   <a href={PHARMACY_DELIVERY_URL} className="font-semibold text-white hover:underline">
                     +91 63637 78957
                   </a>
+                </span>
+              </li>
+              <li className="flex gap-3 rounded-2xl border border-[#ff5a6e]/40 bg-[#ff5a6e]/10 p-3">
+                <Siren aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#ff8a98]" />
+                <span className="leading-6 text-white/90">
+                  In a medical emergency,{" "}
+                  <a href={EMERGENCY_URL} className="font-bold text-white underline underline-offset-2">
+                    call 108
+                  </a>{" "}
+                  or go to the nearest hospital emergency department.
                 </span>
               </li>
             </ul>
