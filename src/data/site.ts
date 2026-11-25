@@ -141,7 +141,20 @@ export const specialties = [
   },
 ];
 
-export const doctors = [
+export type Doctor = {
+  name: string;
+  credentials: string;
+  registration: string;
+  timings: string;
+  specialty: string;
+  image: string;
+  summary: string;
+  bio: string[];
+  /** Hospitals the doctor practises at outside Wellstar. */
+  hospitals?: { primary: string; visiting: string[] };
+};
+
+export const doctors: Doctor[] = [
   {
     name: "Dr. Shakeeb Ahmer",
     credentials: "MBBS, DNB (Internal Medicine), MRCP (UK)",
@@ -161,6 +174,10 @@ export const doctors = [
     name: "Dr. Mehnaz Rashid",
     credentials: "MBBS, DNB (Obstetrics & Gynecology), FMAS, DMAS, ICRS (Robotic Surgery)",
     registration: "KMC Reg. No. 0000589",
+    hospitals: {
+      primary: "Motherhood Hospital",
+      visiting: ["Rainbow", "Cloudnine", "Even", "Viva", "JMJ"],
+    },
     timings: "6:15 PM – 9:30 PM",
     specialty: "Consultant Obstetrician & Gynecologist",
     image: doctorMehnaz,
@@ -168,7 +185,7 @@ export const doctors = [
     bio: [
       "Dr. Mehnaz Rashid is a highly skilled and compassionate Obstetrician & Gynecologist, specialising in high-risk pregnancy management, minimally invasive gynecologic surgery and reproductive health care.",
       "After completing her MBBS, she pursued a DNB in Obstetrics & Gynecology, followed by FMAS & DMAS and ICRS-certified Robotic Surgery training for safer, faster and more precise outcomes.",
-      "She has served at the High-Risk Pregnancy Unit at Bhagwan Mahaveer Jain Hospital, Koshy’s Hospital, is a Visiting Consultant at Cloudnine Hospital, and currently practices as a Consultant at Motherhood Hospital.",
+      "She has served at the High-Risk Pregnancy Unit at Bhagwan Mahaveer Jain Hospital and Koshy’s Hospital, and currently practises primarily as a Consultant at Motherhood Hospital. She also conducts deliveries as a Visiting Consultant at Rainbow, Cloudnine, Even, Viva and JMJ hospitals, among others.",
       "Deeply committed to volunteer work through women’s health camps, her approach is empathetic, evidence-based and holistic — integrating nutrition, exercise therapy and everyday herbs into personalised treatment plans. At Wellstar she leads the Department of Obstetrics & Gynecology.",
     ],
   },
