@@ -1,1 +1,21 @@
+# Old WordPress addresses → new pages (keeps Google rankings and saved links working)
+/our-doctors                        /doctors    301
+/our-doctors/                       /doctors    301
+/dr-shakeeb-ahmer                   /doctors    301
+/dr-shakeeb-ahmer/                  /doctors    301
+/lab-diagnostic                     /lab        301
+/lab-diagnostic/                    /lab        301
+/medicines-supplies                 /pharmacy   301
+/medicines-supplies/                /pharmacy   301
+/wellstar-multi-specialty-services  /services   301
+/wellstar-multi-specialty-services/ /services   301
+/about-us                           /about      301
+/contact-us                         /contact    301
+/feed                               /           301
+/feed/*                             /           301
+/comments/feed                      /           301
+/comments/feed/*                    /           301
+/wp-admin/*                         /           301
+/wp-login.php                       /           301
+
 /*    /index.html   200

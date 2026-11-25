@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { metaFor, normalizePath } from "@/data/pageMeta";
 import { SITE_URL } from "@/data/site";
 
 function setMeta(attribute: "name" | "property", key: string, content: string) {
@@ -12,12 +13,13 @@ function setMeta(attribute: "name" | "property", key: string, content: string) {
   tag.content = content;
 }
 
-/** Per-page <title>, description, canonical URL and social preview tags. */
-export function usePageMeta(title: string, description: string) {
+/** Keeps <title>, description, canonical URL and social tags in sync with the current route. */
+export function usePageMeta() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const url = `${SITE_URL}${pathname === "/" ? "/" : pathname}`;
+    const { title, description } = metaFor(pathname);
+    const url = `${SITE_URL}${normalizePath(pathname)}`;
     document.title = title;
     setMeta("name", "description", description);
     setMeta("property", "og:title", title);
@@ -33,5 +35,5 @@ export function usePageMeta(title: string, description: string) {
       document.head.append(canonical);
     }
     canonical.href = url;
-  }, [title, description, pathname]);
+  }, [pathname]);
 }

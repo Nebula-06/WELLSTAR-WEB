@@ -1,51 +1,51 @@
 import { useEffect } from 'react'
 import { MotionConfig } from 'motion/react'
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { SiteLayout } from '@/components/SiteLayout'
-import About from '@/pages/About'
-import Contact from '@/pages/Contact'
-import Doctors from '@/pages/Doctors'
 import Home from '@/pages/Home'
-import Lab from '@/pages/Lab'
-import Pharmacy from '@/pages/Pharmacy'
-import Services from '@/pages/Services'
+import { lazyPages } from '@/routes'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (hash) {
-      const id = hash.replace('#', '')
+    if (!hash) {
+      window.scrollTo(0, 0)
+      return
+    }
+    // The target may live in a page that is still loading, so look for it for a moment.
+    const id = decodeURIComponent(hash.slice(1))
+    let tries = 0
+    const timer = window.setInterval(() => {
       const el = document.getElementById(id)
       if (el) {
+        window.clearInterval(timer)
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return
+      } else if (++tries > 30) {
+        window.clearInterval(timer)
+        window.scrollTo(0, 0)
       }
-    }
-    window.scrollTo(0, 0)
+    }, 50)
+    return () => window.clearInterval(timer)
   }, [pathname, hash])
 
   return null
 }
 
+/** The app without a router, so the browser (BrowserRouter) and the pre-renderer (StaticRouter) can each wrap it. */
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
-    <BrowserRouter>
       <ScrollToTop />
       <Routes>
         <Route element={<SiteLayout />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="doctors" element={<Doctors />} />
-          <Route path="services" element={<Services />} />
-          <Route path="lab" element={<Lab />} />
-          <Route path="pharmacy" element={<Pharmacy />} />
-          <Route path="contact" element={<Contact />} />
+          {Object.entries(lazyPages).map(([path, Page]) => (
+            <Route key={path} path={path.slice(1)} element={<Page />} />
+          ))}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
-    </BrowserRouter>
     </MotionConfig>
   )
 }

@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import {
   Activity,
+  ArrowDown,
   ArrowUpRight,
   Baby,
   Clock3,
@@ -18,6 +17,7 @@ import {
   Stethoscope,
   TestTube,
   Thermometer,
+  Venus,
   type LucideIcon,
 } from "lucide-react";
 import { PackageCard } from "@/components/PackageCard";
@@ -34,7 +34,6 @@ import {
   whatsappLink,
   womensHealthPackages,
 } from "@/data/site";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
 const diagnosticIcons: Record<string, LucideIcon> = {
   "Blood & Urine Tests": Droplets,
@@ -51,12 +50,10 @@ const diagnosticIcons: Record<string, LucideIcon> = {
   "Partner imaging": ScanLine,
 };
 
-const tabs = [
-  { id: "general", label: "General Health Packages", short: "General", packages: generalHealthPackages },
-  { id: "women", label: "Women’s Health Packages", short: "Women’s", packages: womensHealthPackages },
+const packageSections = [
+  { id: "packages", label: "General Health Packages", short: "General", kicker: PACKAGES_TAGLINE, packages: generalHealthPackages },
+  { id: "womens-packages", label: "Women’s Health Packages", short: "Women’s", kicker: "Women’s health", packages: womensHealthPackages },
 ] as const;
-
-type TabId = (typeof tabs)[number]["id"];
 
 const labInfo: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -81,13 +78,6 @@ const allPackages =[...generalHealthPackages, ...womensHealthPackages];
 const lowestPrice = Math.min(...allPackages.map((pkg) => pkg.offerPrice));
 
 export default function Lab() {
-  usePageMeta(
-    "Health Packages from ₹999 & Lab Tests | Wellstar, Hebbal",
-    "Doctor-curated general and women’s health packages from ₹999, home sample collection, blood tests, ECG and CTG/NST at Wellstar Diagnostic Centre, Hebbal.",
-  );
-  const [activeTab, setActiveTab] = useState<TabId>("general");
-  const current = tabs.find((tab) => tab.id === activeTab) ?? tabs[0];
-
   return (
     <main>
       <PageHero
@@ -110,13 +100,9 @@ export default function Lab() {
         }
         aside={
           <div className="bg-navy-mesh relative overflow-hidden rounded-[2rem] p-7 text-white shadow-2xl sm:p-9">
-            <div
-              className="pointer-events-none absolute -bottom-20 -right-20 size-64 animate-spin-slow rounded-full border-2 border-dashed border-white/15"
-              aria-hidden="true"
-            />
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#ff8a98]">Expert Quality Care</p>
             <p className="mt-3 font-display text-4xl font-black leading-none sm:text-5xl">Health Packages</p>
-            <p className="mt-3 font-display text-xl font-bold italic text-[#7fe0e8]">{PACKAGES_TAGLINE}</p>
+            <p className="mt-3 font-serif text-2xl italic text-[#7fe0e8]">{PACKAGES_TAGLINE}</p>
             <div className="mt-8 grid grid-cols-2 gap-3">
               <div className="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur">
                 <p className="font-display text-4xl font-black">{allPackages.length}</p>
@@ -138,61 +124,60 @@ export default function Lab() {
         }
       />
 
-      <section id="packages" className="section-y relative scroll-mt-24 border-y border-border bg-surface">
-        <div className="container-x">
-          <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <p className="kicker">{PACKAGES_TAGLINE}</p>
-              <h2 className="section-title mt-4">{current.label}</h2>
-            </div>
+      {packageSections.map((section, sectionIndex) => {
+        const isWomen = section.id === "womens-packages";
+        const other = packageSections[1 - sectionIndex];
+        return (
+          <section
+            key={section.id}
+            id={section.id}
+            aria-labelledby={`${section.id}-title`}
+            className={`section-y relative isolate scroll-mt-24 overflow-hidden ${isWomen ? "" : "border-t border-border bg-surface"}`}
+          >
+            {isWomen && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_85%_0%,color-mix(in_oklab,var(--ws-red)_9%,transparent),transparent_70%),radial-gradient(50%_45%_at_0%_100%,color-mix(in_oklab,var(--ws-teal)_8%,transparent),transparent_70%)]"
+              />
+            )}
+            <div className="container-x">
+              <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+                <div className="max-w-2xl">
+                  <p className="kicker">{section.kicker}</p>
+                  <h2 id={`${section.id}-title`} className="section-title mt-4">
+                    {section.label}
+                  </h2>
+                  <p className="mt-4 text-sm font-semibold text-muted-foreground">
+                    {section.packages.length} packages · from{" "}
+                    <span className="text-brand-red">{formatInr(Math.min(...section.packages.map((pkg) => pkg.offerPrice)))}</span>
+                  </p>
+                </div>
+                <a
+                  href={`#${other.id}`}
+                  className="group inline-flex min-h-11 items-center gap-2 self-start rounded-full border border-border bg-card px-5 text-sm font-bold text-foreground shadow-sm transition hover:border-primary hover:text-primary lg:self-auto"
+                >
+                  {isWomen ? <HeartPulse aria-hidden="true" className="size-4" /> : <Venus aria-hidden="true" className="size-4 text-brand-red" />}
+                  {other.short} packages ({other.packages.length})
+                  <ArrowDown
+                    aria-hidden="true"
+                    className={`size-4 transition-transform ${isWomen ? "rotate-180 group-hover:-translate-y-0.5" : "group-hover:translate-y-0.5"}`}
+                  />
+                </a>
+              </Reveal>
 
-            <div
-              role="tablist"
-              aria-label="Health package categories"
-              className="inline-flex w-full rounded-full border border-border bg-card p-1.5 shadow-sm sm:w-auto"
-            >
-              {tabs.map((tab) => {
-                const selected = tab.id === activeTab;
-                return (
-                  <button
-                    key={tab.id}
-                    type="button"
-                    role="tab"
-                    id={`tab-${tab.id}`}
-                    aria-selected={selected}
-                    aria-controls="package-panel"
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`relative min-h-11 flex-1 cursor-pointer rounded-full px-5 text-sm font-bold transition-colors sm:flex-none ${
-                      selected ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {selected && (
-                      <motion.span
-                        layoutId="package-tab"
-                        className="absolute inset-0 rounded-full bg-primary"
-                        transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                      />
-                    )}
-                    <span className="relative">
-                      {tab.short} <span className="opacity-70">({tab.packages.length})</span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </Reveal>
-
-          <div id="package-panel" role="tabpanel" aria-labelledby={`tab-${activeTab}`} className="mt-12">
-            <AnimatePresence mode="popLayout">
-              <motion.div key={activeTab} className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                {current.packages.map((pkg, index) => (
+              <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {section.packages.map((pkg, index) => (
                   <PackageCard key={pkg.name} pkg={pkg} index={index} />
                 ))}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
-          <Stagger className="mt-14 grid gap-4 md:grid-cols-3" gap={0.08}>
+      <section className="section-y relative border-y border-border bg-surface">
+        <div className="container-x">
+          <Stagger className="grid gap-4 md:grid-cols-3" gap={0.08}>
             {labInfo.map((item) => (
               <StaggerItem key={item.title} className="card-glass flex gap-4 p-6">
                 <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-teal text-white">

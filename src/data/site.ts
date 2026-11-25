@@ -1,5 +1,5 @@
-import doctorShakeeb from "@/assets/doctor-shakeeb.jpg";
-import doctorMehnaz from "@/assets/doctor-mehnaz.jpg";
+import doctorShakeeb from "@/assets/doctor-shakeeb.webp";
+import doctorMehnaz from "@/assets/doctor-mehnaz.webp";
 
 export const SITE_URL = "https://wellstarpolyclinic.com";
 export const WHATSAPP_URL ="https://wa.me/916362064109";
@@ -10,6 +10,20 @@ export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61583266480
 export const INSTAGRAM_URL = "https://www.instagram.com/wellstarpolyclinic_2025/";
 export const CLINIC_ADDRESS = "45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru, Karnataka 560045";
 export const MAPS_URL = "https://maps.google.com/?q=45%2F2%2C+8th+A+Cross+Rd%2C+Kanaka+Nagar%2C+Hebbal%2C+Bengaluru+560045";
+
+/** Opening hours (IST). Day index follows JS: 0 = Sunday … 6 = Saturday. Times are minutes from midnight. */
+export const CLINIC_HOURS: { day: string; open: number; close: number }[] = [
+  { day: "Sunday", open: 8 * 60, close: 13 * 60 },
+  { day: "Monday", open: 8 * 60, close: 22 * 60 },
+  { day: "Tuesday", open: 8 * 60, close: 22 * 60 },
+  { day: "Wednesday", open: 8 * 60, close: 22 * 60 },
+  { day: "Thursday", open: 8 * 60, close: 22 * 60 },
+  { day: "Friday", open: 8 * 60, close: 22 * 60 },
+  { day: "Saturday", open: 8 * 60, close: 22 * 60 },
+];
+
+/** Health packages featured on the home page (by name). */
+export const FEATURED_PACKAGES = ["Basic Fever", "Diabetes Health", "Women's Health", "Comprehensive Health"];
 
 export const EMERGENCY_NOTE =
   "In a medical emergency, call 108 or go to the nearest hospital emergency department.";
@@ -231,6 +245,12 @@ export const generalHealthPackages: HealthPackage[] = [
 
 export const womensHealthPackages: HealthPackage[] = [
   {
+    name: "Basic Antenatal Profile",
+    tests: ["CBC", "FBS / RBS", "TSH", "Blood Group & Rh Typing", "HIV", "HBsAg", "VDRL", "Urine Routine"],
+    originalPrice: 2050,
+    offerPrice: 1299,
+  },
+  {
     name: "Antenatal Health",
     tests: ["CBC", "Blood Group & Rh Typing", "Urine Routine", "HbA1c", "TSH", "Anti HCV", "HBsAg", "HIV", "VDRL", "Vitamin B12", "Vitamin D"],
     addOns: [{ test: "β-HCG", price: 400 }],
@@ -264,11 +284,18 @@ export const womensHealthPackages: HealthPackage[] = [
     offerPrice: 1799,
   },
   {
-    name: "Comprehensive Fertility",
+    name: "Pre Fertility Comprehensive Check Up",
     tests: ["CBC", "ESR", "Urine Routine", "FBS / RBS", "TFT", "HbA1c", "LH", "PRL", "FSH", "AMH", "Vitamin B12", "Vitamin D"],
     addOns: [{ test: "Insulin", price: 600 }],
     originalPrice: 9095,
     offerPrice: 6199,
+  },
+  {
+    name: "Comprehensive Fertility",
+    tests: ["CBC", "ESR", "Urine Routine", "FBS / RBS", "TFT", "HbA1c", "LH", "PRL", "FSH", "AMH", "Testosterone", "Vitamin B12", "Vitamin D"],
+    addOns: [{ test: "Insulin", price: 600 }],
+    originalPrice: 9895,
+    offerPrice: 6699,
   },
 ];
 

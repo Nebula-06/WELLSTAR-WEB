@@ -4,15 +4,10 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
 import { teamRoles, values, whatsappLink, PHONE_URL } from "@/data/site";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
 const valueIcons: LucideIcon[] = [Building2, ShieldCheck, Microscope, MonitorSmartphone];
 
 export default function About() {
-  usePageMeta(
-    "About Wellstar | Polyclinic & Diagnostic Centre, Hebbal",
-    "Wellstar Polyclinic & Diagnostic Centre in Hebbal, Bengaluru — specialists, diagnostics and pharmacy under one roof, where expertise meets empathy.",
-  );
   return (
     <main>
       <PageHero
@@ -50,7 +45,6 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={0.1} className="bg-navy-mesh relative overflow-hidden rounded-[1.75rem] p-7 text-white sm:p-10">
-            <div className="pointer-events-none absolute -bottom-16 -right-16 size-56 animate-spin-slow rounded-full border-2 border-dashed border-white/15" aria-hidden="true" />
             <h2 className="font-display text-3xl font-black">Our team includes</h2>
             <Stagger className="mt-6 grid gap-3" gap={0.06}>
               {teamRoles.map((role) => (

@@ -120,7 +120,6 @@ export function ReviewsSpotlight() {
       onBlurCapture={() => setHovered(false)}
     >
       <div className="card-glass relative overflow-hidden p-7 sm:p-8">
-        <div className="pointer-events-none absolute -left-10 -top-10 size-48 rounded-full bg-brand-red/15 blur-3xl" aria-hidden="true" />
         <div className="relative">
           <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-red">
             <GoogleMark className="size-4" /> Reviews from Google

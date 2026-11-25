@@ -1,14 +1,16 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 
+/** Shared motion tokens: one easing curve, calm durations, short travel distances. */
 const EASE = [0.22, 1, 0.36, 1] as const;
+const DURATION = 0.65;
 
 export function Reveal({
   children,
   className = "",
   id,
   delay = 0,
-  y = 28,
+  y = 20,
 }: {
   children: ReactNode;
   className?: string;
@@ -23,7 +25,7 @@ export function Reveal({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -80px 0px" }}
-      transition={{ duration: 0.7, ease: EASE, delay }}
+      transition={{ duration: DURATION, ease: EASE, delay }}
     >
       {children}
     </motion.div>
@@ -31,7 +33,7 @@ export function Reveal({
 }
 
 /** Staggers its direct <StaggerItem> children as the group scrolls into view. */
-export function Stagger({ children, className = "", gap = 0.08 }: { children: ReactNode; className?: string; gap?: number }) {
+export function Stagger({ children, className = "", gap = 0.07 }: { children: ReactNode; className?: string; gap?: number }) {
   return (
     <motion.div
       className={className}
@@ -51,8 +53,8 @@ export function StaggerItem({ children, className = "", id }: { children: ReactN
       id={id}
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 24, scale: 0.97 },
-        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } },
+        hidden: { opacity: 0, y: 16 },
+        show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
       }}
     >
       {children}

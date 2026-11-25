@@ -1,0 +1,19 @@
+# Wellstar Polyclinic & Diagnostic Centre
+
+> Multispecialty clinic, diagnostic lab and pharmacy in Hebbal, Bengaluru, India. Specialist consultations, doctor-curated health packages (from ₹999) with home sample collection, and medicine delivery within 2 km. Booking is by WhatsApp or phone.
+
+- Address: 45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru, Karnataka 560045, India
+- Phone / WhatsApp: +91 63620 64109 · Pharmacy delivery: +91 63637 78957
+- Email: frontdesk@wellstar.in
+- Hours (IST): Monday–Saturday 8:00 AM–10:00 PM; Sunday 8:00 AM–1:00 PM
+- In a medical emergency, call 108 or go to the nearest hospital emergency department.
+
+## Pages
+
+- [Home](https://wellstarpolyclinic.com/): overview, featured health packages, doctors, how booking works, location
+- [Doctors](https://wellstarpolyclinic.com/doctors): Dr. Shakeeb Ahmer (Internal Medicine, KMC Reg. No. 0001593) and Dr. Mehnaz Rashid (Obstetrics & Gynecology, KMC Reg. No. 0000589)
+- [Services](https://wellstarpolyclinic.com/services): general physician & internal medicine, gynecology & obstetrics, orthopedics, dermatology, day care
+- [Lab & health packages](https://wellstarpolyclinic.com/lab): 12 general and women's health packages with prices, individual diagnostic tests
+- [Pharmacy](https://wellstarpolyclinic.com/pharmacy): WHO-GMP medicines, doctor-supervised dispensing, home delivery within 2 km
+- [Contact](https://wellstarpolyclinic.com/contact): map, hours, contact form, FAQ
+- [About](https://wellstarpolyclinic.com/about): the clinic and its team

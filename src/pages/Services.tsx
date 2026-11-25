@@ -1,26 +1,18 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowUpRight, Bone, Check, HeartPulse, Sparkles, Stethoscope, Syringe, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Check, Stethoscope } from "lucide-react";
 import servicesHero from "@/assets/services-hero.webp";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { ServiceShowcase } from "@/components/ServiceShowcase";
+import { TiltImage } from "@/components/TiltImage";
 import { Button } from "@/components/ui/button";
+import { serviceMedia } from "@/data/serviceMedia";
 import { specialties, whatsappLink } from "@/data/site";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
-const specialtyIcons: Record<string, LucideIcon> = {
-  "general-physician": Stethoscope,
-  gynecology: HeartPulse,
-  orthopedics: Bone,
-  dermatology: Sparkles,
-  "day-care": Syringe,
-};
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 export default function Services() {
-  usePageMeta(
-    "Medical Services | Wellstar Polyclinic, Hebbal",
-    "General physician & internal medicine, gynecology & obstetrics, orthopedics, dermatology and day care at Wellstar Polyclinic, Hebbal, Bengaluru.",
-  );
   const [activeId, setActiveId] = useState(specialties[0]?.id ?? "");
 
   useEffect(() => {
@@ -55,12 +47,32 @@ export default function Services() {
         }
       />
 
+      <section className="section-y border-t border-border">
+        <div className="container-x">
+          <Reveal className="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="kicker">Explore specialties</p>
+              <h2 className="section-title mt-4">
+                {specialties.length} specialties. <span className="text-gradient">One roof.</span>
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-6 text-muted-foreground">
+              <span className="hidden lg:inline">Hover or tap a panel to open it.</span>
+              <span className="lg:hidden">Swipe through the specialties.</span>
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ServiceShowcase />
+          </Reveal>
+        </div>
+      </section>
+
       <section className="section-y border-t border-border bg-surface">
-        <div className="container-x grid gap-10 lg:grid-cols-[17rem_1fr]">
+        <div className="container-x grid gap-10 lg:grid-cols-[16rem_1fr]">
           <nav aria-label="Specialties" className="hidden lg:block">
             <ul className="sticky top-28 grid gap-1.5">
               {specialties.map((item, index) => {
-                const Icon = specialtyIcons[item.id] ?? Stethoscope;
+                const Icon = serviceMedia[item.id]?.icon ?? Stethoscope;
                 const active = activeId === item.id;
                 return (
                   <li key={item.id}>
@@ -89,39 +101,69 @@ export default function Services() {
             </ul>
           </nav>
 
-          <div className="grid gap-6">
+          <div className="grid gap-8">
             {specialties.map((item, index) => {
-              const Icon = specialtyIcons[item.id] ?? Stethoscope;
+              const media = serviceMedia[item.id];
+              const Icon = media?.icon ?? Stethoscope;
+              const flip = index % 2 === 1;
               return (
-                <Reveal key={item.id} id={item.id} className="card-glass scroll-mt-28 overflow-hidden">
-                  <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-                    <div className="relative border-b border-border p-7 sm:p-9 lg:border-b-0 lg:border-r">
-                      <span className="pointer-events-none absolute right-5 top-3 font-display text-8xl font-black leading-none text-primary/[0.07]" aria-hidden="true">
-                        0{index + 1}
-                      </span>
-                      <span className="flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-brand-teal text-white shadow-lg">
-                        <Icon aria-hidden="true" className="size-7" />
-                      </span>
-                      <h2 className="mt-6 font-display text-3xl font-black leading-tight text-foreground">{item.title}</h2>
-                      <p className="mt-3 text-sm font-semibold leading-6 text-brand-teal">{item.lead}</p>
-                      <Button asChild variant="outline" className="mt-6">
-                        <a href={whatsappLink(`Hello, I would like to ask about ${item.title}.`)} target="_blank" rel="noreferrer">
-                          Book / ask on WhatsApp <ArrowUpRight aria-hidden="true" />
-                        </a>
-                      </Button>
-                    </div>
-                    <div className="p-7 sm:p-9">
+                <Reveal key={item.id} id={item.id} className="card-glass scroll-mt-28 overflow-hidden p-3 sm:p-4">
+                  <div className={`grid gap-4 xl:grid-cols-[0.95fr_1.05fr] ${flip ? "xl:[&>*:first-child]:order-2" : ""}`}>
+                    <TiltImage
+                      src={media?.image ?? ""}
+                      alt={media?.alt ?? ""}
+                      position={media?.position}
+                      className="h-80 sm:h-96 xl:h-auto xl:min-h-[28rem]"
+                    >
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="flex size-12 items-center justify-center rounded-2xl text-[#041029] shadow-lg"
+                          style={{ backgroundColor: media?.accent }}
+                        >
+                          <Icon aria-hidden="true" className="size-6" />
+                        </span>
+                        <span className="font-display text-sm font-bold tracking-[0.2em] text-white/75">
+                          0{index + 1} / 0{specialties.length}
+                        </span>
+                      </div>
+                      <h2 className="mt-4 font-display text-3xl font-black leading-tight text-white sm:text-4xl">{item.title}</h2>
+                      <p className="mt-2 text-sm font-semibold sm:text-base" style={{ color: media?.accent }}>
+                        {item.lead}
+                      </p>
+                    </TiltImage>
+
+                    <div className="flex flex-col p-4 sm:p-6">
                       <p className="leading-7 text-muted-foreground">{item.description}</p>
-                      <ul className="mt-6 grid gap-3">
+                      <motion.ul
+                        className="mt-6 grid gap-3"
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+                        variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: 0.15 } } }}
+                      >
                         {item.points.map((point) => (
-                          <li key={point} className="flex gap-3 text-sm leading-6 text-foreground">
+                          <motion.li
+                            key={point}
+                            className="flex gap-3 rounded-2xl border border-border/70 bg-background/60 p-3 text-sm leading-6 text-foreground"
+                            variants={{
+                              hidden: { opacity: 0, x: flip ? -20 : 20 },
+                              show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE } },
+                            }}
+                          >
                             <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
                               <Check aria-hidden="true" className="size-3" strokeWidth={3.5} />
                             </span>
                             <span>{point}</span>
-                          </li>
+                          </motion.li>
                         ))}
-                      </ul>
+                      </motion.ul>
+                      <div className="mt-auto pt-6">
+                        <Button asChild>
+                          <a href={whatsappLink(`Hello, I would like to ask about ${item.title}.`)} target="_blank" rel="noreferrer">
+                            Book / ask on WhatsApp <ArrowUpRight aria-hidden="true" />
+                          </a>
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Reveal>

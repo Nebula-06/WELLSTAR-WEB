@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight, Clock3, Mail, MapPin, Menu, MessageCircle, Moon, Phone, Siren, Sun, Truck, X } from "lucide-react";
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import { ArrowUpRight, Clock3, Mail, MapPin, Menu, MessageCircle, Moon, Navigation, Phone, Siren, Sun, Truck, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EcgLine } from "@/components/EcgLine";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useTheme } from "@/hooks/useTheme";
-import logoImage from "@/assets/wellstar-logo.jpg";
+import { BrandLogo } from "@/components/BrandLogo";
 import { CLINIC_ADDRESS, EMAIL, EMERGENCY_URL, MAPS_URL, navItems, PHARMACY_DELIVERY_URL, PHONE_URL, whatsappLink } from "@/data/site";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -15,6 +16,12 @@ export function SiteLayout() {
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { pathname } = useLocation();
+  const [firstPath] = useState(pathname);
+  const [hasNavigated, setHasNavigated] = useState(false);
+  if (!hasNavigated && pathname !== firstPath) setHasNavigated(true);
+  usePageMeta();
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -24,7 +31,13 @@ export function SiteLayout() {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-x-clip bg-background text-foreground">
+    <div className="min-h-screen overflow-x-clip pb-[calc(4.6rem+env(safe-area-inset-bottom))] text-foreground md:pb-0">
+      {/* Thin reading-progress line (pattern: 21st.dev "Scroll Progress") */}
+      <motion.div
+        className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-gradient-to-r from-primary via-brand-teal to-brand-red"
+        style={{ scaleX: progress }}
+        aria-hidden="true"
+      />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
@@ -36,30 +49,26 @@ export function SiteLayout() {
         <div
           className={`mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-full border px-2.5 py-2 transition-all duration-500 sm:px-3 ${
             scrolled || menuOpen
-              ? "border-border/80 bg-card/80 shadow-[0_18px_40px_-24px_rgba(10,42,110,0.45)] backdrop-blur-xl"
-              : "border-transparent bg-card/40 backdrop-blur-md"
+              ? "border-border/80 bg-card/85 shadow-[var(--ws-shadow-md)] backdrop-blur-xl"
+              : "border-transparent bg-card/50 backdrop-blur-md"
           }`}
         >
           <Link
             to="/"
-            className="flex min-w-0 items-center rounded-full bg-white px-3 py-1 ring-1 ring-black/5"
+            className="flex min-w-0 items-center rounded-2xl py-0.5 pl-2 pr-1 sm:pl-3"
             aria-label="Wellstar Polyclinic & Diagnostic Centre home"
           >
-            <img
-              src={logoImage}
-              alt="Wellstar Polyclinic and Diagnostic Centre"
-              className="h-9 w-auto max-w-[170px] object-contain sm:h-10 sm:max-w-[200px]"
-            />
+            <BrandLogo />
           </Link>
 
-          <nav aria-label="Main navigation" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 end={item.to === "/"}
                 className={({ isActive }) =>
-                  `relative rounded-full px-2.5 py-2 text-sm font-semibold xl:px-3.5 transition-colors ${
+                  `relative rounded-full px-3.5 py-2 text-sm font-semibold transition-colors ${
                     isActive ? "text-primary-foreground" : "text-foreground/75 hover:text-primary"
                   }`
                 }
@@ -112,7 +121,7 @@ export function SiteLayout() {
               type="button"
               variant="outline"
               size="icon"
-              className="lg:hidden"
+              className="xl:hidden"
               aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
@@ -132,7 +141,7 @@ export function SiteLayout() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98, transition: { duration: 0.15 } }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="card-glass mx-auto mt-2 max-w-7xl p-3 lg:hidden"
+              className="card-glass mx-auto mt-2 max-w-7xl p-3 xl:hidden"
             >
               <ul className="grid gap-1">
                 {navItems.map((item, index) => (
@@ -171,23 +180,22 @@ export function SiteLayout() {
       <motion.div
         key={pathname}
         id="main"
-        initial={{ opacity: 0, y: 10 }}
+        // First page load shows the pre-rendered page immediately; later navigations fade in.
+        initial={hasNavigated ? { opacity: 0, y: 10 } : false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: EASE }}
       >
-        <Outlet />
+        <Suspense fallback={<div className="min-h-screen" aria-busy="true" />}>
+          <Outlet />
+        </Suspense>
       </motion.div>
 
       <footer className="relative isolate overflow-hidden px-3 pb-3 sm:px-6 sm:pb-6">
         <div className="bg-navy-mesh relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] px-6 py-14 text-white sm:px-12 sm:py-16">
-          <div
-            className="pointer-events-none absolute -right-24 -top-24 size-80 animate-spin-slow rounded-full border border-dashed border-white/15"
-            aria-hidden="true"
-          />
           <div className="relative grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
               <p className="font-display text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl">
-                Multispecialty clinic. One roof. <span className="text-[#ff8a98]">Always near.</span>
+                Multispecialty clinic. <span className="font-serif font-normal italic tracking-normal text-[#ff8a98]">One roof.</span>
               </p>
               <EcgLine className="mt-5 h-8 w-64" strokeClassName="stroke-[#3fd0da]" />
               <div className="mt-8 flex flex-wrap gap-3">
@@ -244,15 +252,15 @@ export function SiteLayout() {
 
           <div className="relative mt-14 flex flex-col gap-6 border-t border-white/15 pt-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <Link to="/" className="font-display text-3xl font-black tracking-tight">
-                Wellstar<span className="text-[#ff5a6e]">+</span>
+              <Link to="/" className="inline-flex" aria-label="Wellstar Polyclinic & Diagnostic Centre home">
+                <BrandLogo inverted />
               </Link>
-              <p className="mt-2 text-sm text-white/70">Polyclinic & Diagnostic Centre · Hebbal, Bengaluru</p>
+              <p className="mt-3 text-sm text-white/70">Hebbal, Bengaluru</p>
               <p className="mt-1 text-xs text-white/50">wellstar polyclinic and diagnostic centre © | all rights reserved</p>
             </div>
-            <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/80">
+            <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-5 text-sm text-white/80">
               {navItems.slice(1).map((item) => (
-                <Link key={item.to} to={item.to} className="hover:text-white">
+                <Link key={item.to} to={item.to} className="inline-flex min-h-11 items-center hover:text-white">
                   {item.label}
                 </Link>
               ))}
@@ -266,11 +274,42 @@ export function SiteLayout() {
         target="_blank"
         rel="noreferrer"
         aria-label="Chat with Wellstar on WhatsApp"
-        className="fixed bottom-5 right-5 z-40 flex size-14 items-center justify-center rounded-full bg-[#1faa59] text-white shadow-[0_16px_34px_-12px_rgba(31,170,89,0.8)] transition-transform hover:scale-105 sm:bottom-7 sm:right-7"
+        className="fixed bottom-7 right-7 z-40 hidden size-14 items-center justify-center rounded-full bg-[#1faa59] text-white shadow-[0_16px_34px_-12px_rgba(31,170,89,0.8)] transition-transform hover:scale-105 md:flex"
       >
         <span className="absolute inset-0 animate-pulse-ring rounded-full bg-[#1faa59]" aria-hidden="true" />
         <MessageCircle aria-hidden="true" className="relative size-6" />
       </a>
+
+      {/* Phones: one-tap call / WhatsApp / directions */}
+      <nav
+        aria-label="Quick contact"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-card/90 px-3 pb-[max(0.6rem,env(safe-area-inset-bottom))] pt-2.5 shadow-[0_-12px_30px_-18px_rgba(10,42,110,0.45)] backdrop-blur-xl md:hidden"
+      >
+        <div className="mx-auto grid max-w-md grid-cols-3 gap-2">
+          <a
+            href={PHONE_URL}
+            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-2xl bg-secondary text-xs font-bold text-secondary-foreground active:scale-95"
+          >
+            <Phone aria-hidden="true" className="size-5" /> Call
+          </a>
+          <a
+            href={whatsappLink("Hello, I would like to book an appointment.")}
+            target="_blank"
+            rel="noreferrer"
+            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-2xl bg-[#0f7f43] text-xs font-bold text-white shadow-[0_10px_22px_-12px_rgba(31,170,89,0.9)] active:scale-95"
+          >
+            <MessageCircle aria-hidden="true" className="size-5" /> WhatsApp
+          </a>
+          <a
+            href={MAPS_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-2xl bg-secondary text-xs font-bold text-secondary-foreground active:scale-95"
+          >
+            <Navigation aria-hidden="true" className="size-5" /> Directions
+          </a>
+        </div>
+      </nav>
     </div>
   );
 }

@@ -11,11 +11,10 @@ export function PackageCard({ pkg, index }: { pkg: HealthPackage; index: number 
 
   return (
     <motion.article
-      layout
       initial={{ opacity: 0, y: 28, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -16, scale: 0.96, transition: { duration: 0.18 } }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: index * 0.06 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.06 }}
       className="group relative flex h-full flex-col rounded-[1.75rem] bg-gradient-to-br from-border via-border to-border p-px transition-all duration-300 hover:from-primary hover:via-brand-teal hover:to-brand-red"
     >
       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(1.75rem-1px)] bg-card p-6 sm:p-7">
@@ -73,9 +72,9 @@ export function PackageCard({ pkg, index }: { pkg: HealthPackage; index: number 
             <p className="mt-1 text-xs font-bold uppercase tracking-wider text-brand-teal">Package Price</p>
             <p className="font-display text-4xl font-black leading-none text-brand-red">{formatInr(pkg.offerPrice)}</p>
           </div>
-          <Button asChild aria-label={`Book ${pkg.name} package on WhatsApp`}>
+          <Button asChild>
             <a href={bookHref} target="_blank" rel="noreferrer">
-              Book now <ArrowUpRight aria-hidden="true" />
+              Book now<span className="sr-only"> — {pkg.name} package on WhatsApp</span> <ArrowUpRight aria-hidden="true" />
             </a>
           </Button>
         </div>

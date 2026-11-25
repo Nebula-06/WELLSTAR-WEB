@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { ArrowUpRight, Clock3, Mail, MapPin, Phone, Siren } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PageHero } from "@/components/PageHero";
+import { ClinicMap } from "@/components/ClinicMap";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { Button } from "@/components/ui/button";
@@ -23,15 +24,10 @@ import {
   specialties,
   whatsappLink,
 } from "@/data/site";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
 const fieldClass = "min-h-12 rounded-2xl border-input bg-background px-4 text-base sm:text-sm";
 
 export default function Contact() {
-  usePageMeta(
-    "Contact & Directions | Wellstar Polyclinic, Hebbal",
-    "Visit Wellstar Polyclinic at 45/2, 8th A Cross Rd, Kanaka Nagar, Hebbal, Bengaluru. Mon–Sat 8 AM–10 PM, Sun 8 AM–1 PM. Call +91 63620 64109.",
-  );
   const [specialty, setSpecialty] = useState("");
   const [formError, setFormError] = useState("");
 
@@ -180,14 +176,7 @@ export default function Contact() {
           </Stagger>
 
           <Reveal delay={0.1} className="relative min-h-80 overflow-hidden rounded-[2rem] border border-border shadow-xl">
-            <iframe
-              title="Map showing Wellstar Polyclinic & Diagnostic Centre in Hebbal, Bengaluru"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(CLINIC_ADDRESS)}&output=embed`}
-              className="absolute inset-0 size-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
+            <ClinicMap />
           </Reveal>
         </div>
       </section>

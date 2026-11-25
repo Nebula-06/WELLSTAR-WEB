@@ -6,13 +6,8 @@ import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { doctors, whatsappLink } from "@/data/site";
-import { usePageMeta } from "@/hooks/usePageMeta";
 
 export default function Doctors() {
-  usePageMeta(
-    "Our Doctors | Wellstar Polyclinic, Hebbal",
-    "Meet Dr. Shakeeb Ahmer (Internal Medicine) and Dr. Mehnaz Rashid (Obstetrics & Gynecology) at Wellstar Polyclinic, Hebbal. Book on WhatsApp.",
-  );
   const [expandedDoctor, setExpandedDoctor] = useState<string | null>(doctors[0]?.name ?? null);
 
   return (
@@ -43,6 +38,7 @@ export default function Doctors() {
                   <div className="relative aspect-[4/4] overflow-hidden bg-secondary">
                     <img
                       src={doctor.image}
+                      loading="lazy"
                       alt={doctor.name}
                       className="size-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                     />
@@ -99,7 +95,7 @@ export default function Doctors() {
 
                     <Button asChild className="mt-4 w-full">
                       <a href={whatsappLink(`Hello, I would like to book with ${doctor.name}.`)} target="_blank" rel="noreferrer">
-                        Book with {doctor.name.split(" ").slice(-1)[0]} <ArrowUpRight aria-hidden="true" />
+                        Book with Dr. {doctor.name.split(" ")[1]} <ArrowUpRight aria-hidden="true" />
                       </a>
                     </Button>
                   </div>
