@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, BadgeCheck, ChevronDown, GraduationCap } from "lucide-react";
 import doctorsHero from "@/assets/doctors-hero.webp";
+import { DoctorTimings } from "@/components/DoctorTimings";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
@@ -59,6 +60,7 @@ export default function Doctors() {
                       <BadgeCheck aria-hidden="true" className="size-4" />
                       {doctor.registration}
                     </p>
+                    <DoctorTimings timings={doctor.timings} className="mt-4" />
 
                     <motion.div layout className="mt-4 text-sm leading-6 text-muted-foreground">
                       <p>{doctor.bio[0]}</p>

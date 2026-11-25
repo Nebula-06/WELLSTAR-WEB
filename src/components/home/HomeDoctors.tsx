@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowUpRight, BadgeCheck, GraduationCap } from "lucide-react";
+import { DoctorTimings } from "@/components/DoctorTimings";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { doctors, whatsappLink } from "@/data/site";
@@ -56,6 +57,7 @@ export function HomeDoctors() {
                 <p className="mt-3 inline-flex items-center gap-1.5 self-start rounded-full border border-brand-teal/40 bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">
                   <BadgeCheck aria-hidden="true" className="size-4" /> {doctor.registration}
                 </p>
+                <DoctorTimings timings={doctor.timings} compact className="mt-4 self-start" />
                 <p className="mt-4 text-sm leading-6 text-muted-foreground">{doctor.summary}</p>
                 <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
                   <Button asChild>
