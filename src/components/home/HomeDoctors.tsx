@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowUpRight, BadgeCheck, GraduationCap } from "lucide-react";
+import { DoctorConditions } from "@/components/DoctorConditions";
 import { DoctorTimings } from "@/components/DoctorTimings";
 import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
@@ -59,6 +60,7 @@ export function HomeDoctors() {
                 </p>
                 <DoctorTimings timings={doctor.timings} compact className="mt-4 self-start" />
                 <p className="mt-4 text-sm leading-6 text-muted-foreground">{doctor.summary}</p>
+                <DoctorConditions doctor={doctor} limit={4} className="mt-5" />
                 <div className="mt-auto flex flex-wrap gap-2.5 pt-6">
                   <Button asChild>
                     <a href={whatsappLink(`Hello, I would like to book with ${doctor.name}.`)} target="_blank" rel="noreferrer">

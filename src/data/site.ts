@@ -141,8 +141,22 @@ export const specialties = [
   },
 ];
 
+export type DoctorCondition = {
+  label: string;
+  /** Everyday words patients type (e.g. "sugar" for diabetes), used by the condition finder. */
+  keywords: string[];
+};
+
 export type Doctor = {
   name: string;
+  /** Brand colour used to tell the doctors apart in the condition finder. */
+  accent: "teal" | "red";
+  /** Conditions the doctor manages (approved by the clinic). */
+  conditions: DoctorCondition[];
+  /** Short trust facts taken from the doctor's bio. */
+  highlights: { value: string; label: string }[];
+  /** A real Google review that names the doctor, quoted word for word. */
+  review?: { quote: string; name: string };
   credentials: string;
   registration: string;
   timings: string;
@@ -154,12 +168,35 @@ export type Doctor = {
   hospitals?: { primary: string; visiting: string[] };
 };
 
+/** Page anchor for a doctor's profile on the Doctors page, e.g. "dr-shakeeb-ahmer". */
+export const doctorSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export const doctors: Doctor[] = [
   {
     name: "Dr. Shakeeb Ahmer",
+    accent: "teal",
+    conditions: [
+      { label: "Diabetes", keywords: ["sugar", "diabetic", "blood sugar", "hba1c", "insulin", "glucose"] },
+      { label: "High blood pressure", keywords: ["bp", "hypertension", "blood pressure", "pressure"] },
+      { label: "Thyroid disorders", keywords: ["thyroid", "hypothyroid", "hyperthyroid", "tsh", "goitre"] },
+      { label: "Fever & infections", keywords: ["fever", "dengue", "typhoid", "viral", "infection", "malaria", "cold", "cough", "flu"] },
+      { label: "Dehydration", keywords: ["vomiting", "loose motion", "diarrhoea", "diarrhea", "dehydrated", "weakness"] },
+      { label: "Chronic & multi-system illness", keywords: ["chronic", "long-term illness", "multiple problems", "complex illness"] },
+      { label: "Preventive health check-ups", keywords: ["check-up", "checkup", "health check", "screening", "full body", "preventive"] },
+      { label: "Lifestyle counselling", keywords: ["lifestyle", "weight", "diet", "exercise", "obesity"] },
+    ],
+    highlights: [
+      { value: "10+ yrs", label: "Clinical experience" },
+      { value: "MRCP", label: "United Kingdom" },
+      { value: "4", label: "Leading hospitals served" },
+    ],
+    review: {
+      quote: "Dr Shakeeb is an excellent doctor who listens carefully, explains things properly and treats with compassion and the treatment plan was effective. Highly recommended!",
+      name: "Vivek Chaudhary",
+    },
     credentials: "MBBS, DNB (Internal Medicine), MRCP (UK)",
     registration: "KMC Reg. No. 0001593",
-    timings: "6:15 PM – 9:30 PM",
+    timings: "6:00 PM – 9:00 PM",
     specialty: "Consultant Physician & Internal Medicine Specialist",
     image: doctorShakeeb,
     summary: "Internal medicine specialist with over a decade of experience and a special interest in diabetes care.",
@@ -172,13 +209,33 @@ export const doctors: Doctor[] = [
   },
   {
     name: "Dr. Mehnaz Rashid",
+    accent: "red",
+    conditions: [
+      { label: "Pregnancy care", keywords: ["pregnant", "pregnancy", "antenatal", "prenatal", "expecting"] },
+      { label: "High-risk pregnancy", keywords: ["high risk", "high-risk", "complicated pregnancy", "gestational"] },
+      { label: "Deliveries", keywords: ["delivery", "labour", "labor", "childbirth", "normal delivery", "c-section", "caesarean", "cesarean"] },
+      { label: "PCOS / PCOD", keywords: ["pcos", "pcod", "cyst", "ovary", "ovarian"] },
+      { label: "Infertility", keywords: ["fertility", "infertility", "conceive", "trying for a baby"] },
+      { label: "Period problems", keywords: ["period", "periods", "menstrual", "irregular periods", "cramps", "menstruation"] },
+      { label: "Minimally invasive & robotic gynaecological surgery", keywords: ["surgery", "laparoscopy", "laparoscopic", "keyhole", "robotic"] },
+      { label: "Reproductive health", keywords: ["reproductive", "gynaecologist", "gynecologist", "gynae", "gyne", "women's health", "womens health"] },
+    ],
+    highlights: [
+      { value: "ICRS", label: "Robotic surgery certified" },
+      { value: "FMAS", label: "Minimal access surgery" },
+      { value: "6+", label: "Hospitals she practises at" },
+    ],
+    review: {
+      quote: "Great experience. Dr.Mehnaz mam is a best doctor and she is good listener.she has healing hands.over all great experience",
+      name: "Rakheeba Y",
+    },
     credentials: "MBBS, DNB (Obstetrics & Gynecology), FMAS, DMAS, ICRS (Robotic Surgery)",
     registration: "KMC Reg. No. 0000589",
     hospitals: {
       primary: "Motherhood Hospital",
       visiting: ["Rainbow", "Cloudnine", "Even", "Viva", "JMJ"],
     },
-    timings: "6:15 PM – 9:30 PM",
+    timings: "6:00 PM – 9:00 PM",
     specialty: "Consultant Obstetrician & Gynecologist",
     image: doctorMehnaz,
     summary: "Specialist in high-risk pregnancy, minimally invasive surgery and reproductive health.",

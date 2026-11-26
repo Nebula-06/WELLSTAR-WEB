@@ -2,12 +2,15 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, BadgeCheck, ChevronDown, GraduationCap } from "lucide-react";
 import doctorsHero from "@/assets/doctors-hero.webp";
+import { ConditionFinder } from "@/components/ConditionFinder";
+import { DoctorConditions } from "@/components/DoctorConditions";
+import { DoctorHighlights, DoctorReview } from "@/components/DoctorHighlights";
 import { DoctorHospitals } from "@/components/DoctorHospitals";
 import { DoctorTimings } from "@/components/DoctorTimings";
 import { PageHero } from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
-import { doctors, whatsappLink } from "@/data/site";
+import { doctors, doctorSlug, whatsappLink } from "@/data/site";
 
 export default function Doctors() {
   const [expandedDoctor, setExpandedDoctor] = useState<string | null>(doctors[0]?.name ?? null);
@@ -35,7 +38,7 @@ export default function Doctors() {
             const isOpen = expandedDoctor === doctor.name;
             const bioId = `bio-${doctor.name.replace(/\W+/g, "-").toLowerCase()}`;
             return (
-              <StaggerItem key={doctor.name}>
+              <StaggerItem key={doctor.name} id={doctorSlug(doctor.name)} className="scroll-mt-28">
                 <article className="card-glass card-lift group overflow-hidden">
                   <div className="relative aspect-[4/4] overflow-hidden bg-secondary">
                     <img
@@ -63,6 +66,9 @@ export default function Doctors() {
                     </p>
                     <DoctorTimings timings={doctor.timings} className="mt-4" />
                     {doctor.hospitals && <DoctorHospitals hospitals={doctor.hospitals} className="mt-3" />}
+                    <DoctorHighlights doctor={doctor} className="mt-4" />
+                    <DoctorConditions doctor={doctor} className="mt-6" />
+                    <DoctorReview doctor={doctor} className="mt-6" />
 
                     <motion.div layout className="mt-4 text-sm leading-6 text-muted-foreground">
                       <p>{doctor.bio[0]}</p>
@@ -109,6 +115,8 @@ export default function Doctors() {
           })}
         </Stagger>
       </section>
+
+      <ConditionFinder />
     </main>
   );
 }

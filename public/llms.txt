@@ -11,7 +11,7 @@
 ## Pages
 
 - [Home](https://wellstarpolyclinic.com/): overview, featured health packages, doctors, how booking works, location
-- [Doctors](https://wellstarpolyclinic.com/doctors): Dr. Shakeeb Ahmer (Internal Medicine, KMC Reg. No. 0001593) and Dr. Mehnaz Rashid (Obstetrics & Gynecology, KMC Reg. No. 0000589); both consult 6:15 PM – 9:30 PM
+- [Doctors](https://wellstarpolyclinic.com/doctors): Dr. Shakeeb Ahmer (Internal Medicine, KMC Reg. No. 0001593) and Dr. Mehnaz Rashid (Obstetrics & Gynecology, KMC Reg. No. 0000589); both consult 6:00 PM – 9:00 PM
 - [Services](https://wellstarpolyclinic.com/services): general physician & internal medicine, gynecology & obstetrics, orthopedics, dermatology, day care
 - [Lab & health packages](https://wellstarpolyclinic.com/lab): 12 general and women's health packages with prices, individual diagnostic tests
 - [Pharmacy](https://wellstarpolyclinic.com/pharmacy): WHO-GMP medicines, doctor-supervised dispensing, home delivery within 2 km

@@ -1,6 +1,7 @@
 import { Fragment, useRef, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { ConditionFinder } from "@/components/ConditionFinder";
 import { EcgLine } from "@/components/EcgLine";
 import { HeroCollage } from "@/components/home/HeroCollage";
 import { HomeDoctors } from "@/components/home/HomeDoctors";
@@ -96,6 +97,7 @@ export default function Home() {
         <TrustStrip />
       </section>
 
+      <ConditionFinder className="border-b border-border bg-surface" />
       <HomeSpecialties />
       <HomeDoctors />
       <HomePackages />
